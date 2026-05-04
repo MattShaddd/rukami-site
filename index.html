@@ -92,6 +92,7 @@
       min-height: 54px;
       padding: 0 22px;
       border: 1px solid var(--line);
+      border-radius: 999px;
       background: var(--blue);
       color: #030303;
       font-weight: 900;
@@ -137,20 +138,21 @@
       font-weight: 700;
       font-size: clamp(64px, 10vw, 140px);
       line-height: .9;
-      letter-spacing: -.02em;
+      letter-spacing: 0;
       text-transform: uppercase;
       max-width: 860px;
     }
 
     .hero-mark {
-      display: inline-block;
-      color: var(--blue);
-      font-family: Georgia, serif;
-      font-style: italic;
-      font-size: clamp(54px, 8vw, 128px);
-      transform: rotate(-4deg) skew(-8deg);
-      margin: -4px 0 10px 34%;
-      filter: drop-shadow(0 0 16px rgba(92,120,255,.36));
+      display: block;
+      width: clamp(260px, 38vw, 620px);
+      margin: 8px 0 24px;
+    }
+
+    .hero-mark img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .lead {
@@ -503,7 +505,6 @@
       .nav { height: 70px; padding: 18px 18px; }
       .nav .btn { display: none; }
       .hero { padding-top: 108px; }
-      .hero-mark { margin-left: 8%; }
       .blue-strip, .process-grid, .footer { grid-template-columns: 1fr; }
       .section-head { align-items: flex-start; flex-direction: column; }
       .process-card { min-height: 300px; }
@@ -569,8 +570,8 @@
     <section class="hero" id="about">
       <div>
         <div class="kicker">Маркет авторских товаров <span>из Новосибирска</span></div>
-        <h1 class="mega">Сделано<br>руками</h1>
-        <div class="hero-mark"><img src="Logo.svg" alt="Руками" style="height:120px; filter:drop-shadow(0 0 16px rgba(92,120,255,.4));"></div>
+        <h1 class="mega">Сделано</h1>
+        <div class="hero-mark"><img src="Logo.svg" alt="Руками"></div>
         <p class="lead">Мастера из Новосибирска собираются вместе и продают товары, сделанные своими руками. Для посетителей это душевное место для общения, вдохновения и спокойной прогулки между авторскими столами.</p>
         <div class="hero-actions">
           <a class="btn" href="#apply">Оставить заявку →</a>
