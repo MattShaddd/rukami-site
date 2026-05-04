@@ -146,13 +146,25 @@
     .hero-mark {
       display: block;
       width: clamp(260px, 38vw, 620px);
-      margin: 8px 0 24px;
+      margin: 8px 0 12px;
     }
 
     .hero-mark img {
       display: block;
       width: 100%;
       height: auto;
+    }
+
+    .hero-market {
+      width: clamp(260px, 38vw, 620px);
+      margin: 0 0 28px;
+      text-align: center;
+      color: var(--white);
+      font-weight: 900;
+      font-size: clamp(24px, 4vw, 58px);
+      line-height: .9;
+      letter-spacing: .16em;
+      text-transform: uppercase;
     }
 
     .lead {
@@ -570,9 +582,9 @@
     <section class="hero" id="about">
       <div>
         <div class="kicker">Маркет авторских товаров <span>из Новосибирска</span></div>
-        <h1 class="mega">Сделано</h1>
         <div class="hero-mark"><img src="Logo.svg" alt="Руками"></div>
-        <p class="lead">Мастера из Новосибирска собираются вместе и продают товары, сделанные своими руками. Для посетителей это душевное место для общения, вдохновения и спокойной прогулки между авторскими столами.</p>
+        <div class="hero-market">Маркет</div>
+        <p class="lead">Руками маркет — место, где мастера из Новосибирска собираются вместе и продают товары, сделанные своими руками. Для посетителей это душевное место для общения, вдохновения и спокойной прогулки между авторскими столами.</p>
         <div class="hero-actions">
           <a class="btn" href="#apply">Оставить заявку →</a>
           <a class="btn secondary" href="#process">Смотреть процесс</a>
