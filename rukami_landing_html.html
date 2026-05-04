@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Руками — маркет авторских товаров в Новосибирске</title>
+  <meta name="description" content="Руками — маркет, где мастера из Новосибирска продают товары, сделанные своими руками." />
+  <style>
+    :root {
+      --black: #050505;
+      --black-soft: #0b0b0d;
+      --white: #f6f6f1;
+      --muted: #9a9a9a;
+      --blue: #5C78FF;
+      --red: #ff5f53;
+      --yellow: #ffda53;
+      --line: rgba(246, 246, 241, 0.16);
+      --radius: 24px;
+      --max: 1440px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: Inter, Manrope, Montserrat, Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: .22;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.08), transparent 1px),
+        radial-gradient(circle at 80% 40%, rgba(255,255,255,.06), transparent 1px);
+      background-size: 18px 18px, 26px 26px;
+      mix-blend-mode: screen;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      width: min(100%, var(--max));
+      height: 84px;
+      padding: 24px clamp(20px, 5vw, 72px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(to bottom, rgba(5,5,5,.9), rgba(5,5,5,0));
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: rgba(246,246,241,.78);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      min-height: 54px;
+      padding: 0 22px;
+      border: 1px solid var(--line);
+      background: var(--blue);
+      color: #030303;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-size: 13px;
+      transition: transform .2s ease, filter .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--white);
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 128px clamp(20px, 5vw, 72px) 56px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 48px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    .kicker {
+      color: rgba(246,246,241,.7);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 800;
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .kicker span { color: var(--blue); }
+
+    h1, h2, h3, p { margin: 0; }
+
+    .mega {
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(64px, 10vw, 140px);
+      line-height: .9;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      max-width: 860px;
+    }
+
+    .hero-mark {
+      display: inline-block;
+      color: var(--blue);
+      font-family: Georgia, serif;
+      font-style: italic;
+      font-size: clamp(54px, 8vw, 128px);
+      transform: rotate(-4deg) skew(-8deg);
+      margin: -4px 0 10px 34%;
+      filter: drop-shadow(0 0 16px rgba(92,120,255,.36));
+    }
+
+    .lead {
+      max-width: 520px;
+      color: rgba(246,246,241,.82);
+      font-size: clamp(16px, 1.35vw, 21px);
+      line-height: 1.5;
+      margin: 24px 0 34px;
+    }
+
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .visual-card {
+      position: relative;
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(92,120,255,.12), rgba(5,5,5,.75)),
+        url('https://images.unsplash.com/photo-1603371928087-00f5c80d0d48?auto=format&fit=crop&w=1200&q=80') center/cover;
+      box-shadow: 0 40px 120px rgba(0,0,0,.5);
+    }
+
+    .visual-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 24px 24px auto;
+      width: 180px;
+      height: 180px;
+      border: 8px solid var(--blue);
+      border-radius: 50%;
+      opacity: .95;
+      background: rgba(5,5,5,.55);
+    }
+
+    .stamp {
+      position: absolute;
+      right: 42px;
+      bottom: 90px;
+      z-index: 2;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--blue);
+      font-size: 54px;
+      font-weight: 900;
+      transform: rotate(-12deg);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: rgba(246,246,241,.08);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: rgba(246,246,241,.82);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .blue-strip {
+      background: var(--blue);
+      color: #050505;
+      display: grid;
+      grid-template-columns: 1.1fr repeat(4, 1fr);
+      gap: 1px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .strip-cell {
+      padding: clamp(28px, 4vw, 54px);
+      border-right: 1px solid rgba(5,5,5,.28);
+    }
+
+    .strip-cell:first-child {
+      font-family: 'Arial Black', Arial, sans-serif; font-weight: 700;
+      font-size: clamp(38px, 4.5vw, 72px);
+      line-height: .88;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+
+    .strip-cell h3 {
+      font-size: 15px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+
+    .strip-cell p {
+      font-size: 14px;
+      line-height: 1.45;
+      opacity: .75;
+    }
+
+    .section {
+      padding: clamp(72px, 9vw, 132px) clamp(20px, 5vw, 72px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 42px;
+    }
+
+    .title {
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: .95;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+    }
+
+    .section-note {
+      max-width: 420px;
+      color: rgba(246,246,241,.66);
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+    }
+
+    .process-card {
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      background: var(--black-soft);
+    }
+
+    .process-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--img) center/cover;
+      opacity: .52;
+      filter: grayscale(.15) contrast(1.1);
+      transition: transform .5s ease, opacity .5s ease;
+    }
+
+    .process-card:hover::before { transform: scale(1.07); opacity: .7; }
+
+    .process-card > * { position: relative; z-index: 1; }
+
+    .num {
+      color: var(--blue);
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-weight: 700;
+      font-size: 42px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .process-card h3 {
+      font-size: 18px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .process-card p {
+      color: rgba(246,246,241,.74);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .makers-wrap {
+      position: relative;
+      overflow: hidden;
+      padding-bottom: 26px;
+    }
+
+    .makers-wrap::before,
+    .makers-wrap::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 72px;
+      width: 120px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .makers-wrap::before {
+      left: 0;
+      background: linear-gradient(to right, var(--black), transparent);
+    }
+
+    .makers-wrap::after {
+      right: 0;
+      background: linear-gradient(to left, var(--black), transparent);
+    }
+
+    .makers {
+      display: flex;
+      gap: 16px;
+      width: max-content;
+      animation: makersMarquee 42s linear infinite;
+    }
+
+    .makers-wrap:hover .makers {
+      animation-play-state: paused;
+    }
+
+    @keyframes makersMarquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .maker-card {
+      width: 210px;
+      flex: 0 0 210px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,.04);
+    }
+
+    .maker-photo {
+      aspect-ratio: 1 / 1.12;
+      background: var(--img) center/cover;
+      filter: grayscale(.15) contrast(1.05);
+    }
+
+    .maker-info { padding: 16px; }
+
+    .maker-info strong {
+      display: block;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+
+    .maker-info span {
+      display: block;
+      margin-top: 5px;
+      color: var(--blue);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .poster {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      min-height: 640px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .poster-text {
+      padding: clamp(42px, 7vw, 90px) clamp(20px, 5vw, 72px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .poster-art {
+      position: relative;
+      background: radial-gradient(circle at 35% 35%, rgba(92,120,255,.45), transparent 36%), #070707;
+      overflow: hidden;
+      border-left: 1px solid var(--line);
+    }
+
+    .badge {
+      position: absolute;
+      width: 235px;
+      height: 330px;
+      left: 12%;
+      top: 18%;
+      background: var(--blue);
+      color: #050505;
+      border-radius: 18px;
+      transform: rotate(-7deg);
+      box-shadow: 0 30px 80px rgba(0,0,0,.55);
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .badge b {
+      font-family: 'Arial Black', Arial, sans-serif; font-weight: 700;
+      font-size: 44px;
+      line-height: .9;
+      letter-spacing: -.03em;
+      text-transform: uppercase;
+    }
+
+    .sticker {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 20px;
+      background: var(--white);
+      color: #050505;
+      border: 2px solid #050505;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 18px;
+      box-shadow: 7px 7px 0 rgba(0,0,0,.45);
+    }
+
+    .s1 { right: 12%; top: 17%; transform: rotate(8deg); background: var(--yellow); }
+    .s2 { right: 8%; top: 39%; transform: rotate(-5deg); }
+    .s3 { left: 34%; bottom: 14%; transform: rotate(4deg); background: var(--red); }
+    .s4 { right: 22%; bottom: 23%; transform: rotate(-10deg); background: var(--blue); }
+
+    .footer {
+      padding: 48px clamp(20px, 5vw, 72px);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+      color: rgba(246,246,241,.65);
+      font-size: 14px;
+    }
+
+    .footer a { display: block; margin-bottom: 12px; text-transform: uppercase; font-size: 12px; letter-spacing: .08em; }
+
+    @media (max-width: 1080px) {
+      .hero, .poster { grid-template-columns: 1fr; }
+      #place > div:nth-of-type(2) { grid-template-columns: 1fr !important; }
+      .visual-card { min-height: 460px; }
+      .blue-strip { grid-template-columns: 1fr 1fr; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .maker-card { width: 190px; flex-basis: 190px; }
+      .poster-art { min-height: 560px; border-left: none; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 680px) {
+      .nav { height: 70px; padding: 18px 18px; }
+      .nav .btn { display: none; }
+      .hero { padding-top: 108px; }
+      .hero-mark { margin-left: 8%; }
+      .blue-strip, .process-grid, .footer { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .process-card { min-height: 300px; }
+      .badge { left: 8%; width: 190px; height: 285px; }
+      .sticker { font-size: 14px; }
+      .s1 { right: 6%; }
+      .s2 { right: 4%; }
+      .s3 { left: 8%; }
+      .s4 { right: 8%; bottom: 12%; }
+    }
+  
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+    }
+
+    .modal.active { display: flex; }
+
+    .modal-card {
+      background: #0b0b0d;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 400px;
+      width: 90%;
+    }
+
+    .modal-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      cursor: pointer;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="logo" href="#"><img src="logo.svg" alt="Руками" style="height:42px; display:block; filter:invert(1);"></a>
+    <div class="nav-links">
+      <a href="#about">О движении</a>
+      <a href="#process">Процесс</a>
+      <a href="#makers">Участники</a>
+      <a href="#place">Место</a>
+      <a href="#apply">Заявка</a>
+    </div>
+    <a class="btn" href="#apply">Стать участником ↗</a>
+  </nav>
+
+  <main class="page">
+    <section class="hero" id="about">
+      <div>
+        <div class="kicker">Маркет авторских товаров <span>из Новосибирска</span></div>
+        <h1 class="mega">Сделано<br>руками</h1>
+        <div class="hero-mark"><img src="logo.svg" alt="Руками" style="height:120px; filter:drop-shadow(0 0 16px rgba(92,120,255,.4));"></div>
+        <p class="lead">Мастера из Новосибирска собираются вместе и продают товары, сделанные своими руками. Для посетителей это душевное место для общения, вдохновения и спокойной прогулки между авторскими столами.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#apply">Оставить заявку →</a>
+          <a class="btn secondary" href="#process">Смотреть процесс</a>
+        </div>
+      </div>
+      <div class="visual-card" aria-label="Процесс ручного производства">
+        <div class="stamp">✌</div>
+      </div>
+    </section>
+
+    <section class="blue-strip">
+      <div class="strip-cell">Место, где<br>вещи делают люди.</div>
+      <div class="strip-cell"><h3>Авторы рядом</h3><p>Можно спокойно осмотреть столы и поговорить с мастерами.</p></div>
+      <div class="strip-cell"><h3>На любой вкус</h3><p>Украшения, свечи, керамика, декор, подарки и другие авторские вещи.</p></div>
+      <div class="strip-cell"><h3>Душевное место</h3><p>Приходят не только покупать, но и общаться, вдохновляться, знакомиться.</p></div>
+      <div class="strip-cell"><h3>Сделано руками</h3><p>Каждая вещь проходит через внимание автора, а не через безликую полку.</p></div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="section-head">
+        <h2 class="title">Что ждёт<br>на маркете</h2>
+        <p class="section-note">На маркете можно пройтись между столами, рассмотреть товары, задать вопросы авторам и выбрать вещь, которая подходит именно тебе.</p>
+      </div>
+      <div class="process-grid">
+        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=800&q=80')"><div class="num">01</div><h3>Приходишь</h3><p>Заходишь на маркет и сразу попадаешь в живую среду авторов.</p></article>
+        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1617529497471-9218633199c0?auto=format&fit=crop&w=800&q=80')"><div class="num">02</div><h3>Смотришь</h3><p>Спокойно осматриваешь столы, материалы, упаковку и детали.</p></article>
+        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1603371928087-00f5c80d0d48?auto=format&fit=crop&w=800&q=80')"><div class="num">03</div><h3>Общаешься</h3><p>Можно поговорить с мастерами и узнать историю каждой вещи.</p></article>
+        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1516216628859-9bccecab13ca?auto=format&fit=crop&w=800&q=80')"><div class="num">04</div><h3>Выбираешь</h3><p>Находишь товар под свой вкус, цвет, настроение или подарок.</p></article>
+        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=80')"><div class="num">05</div><h3>Уносишь</h3><p>Забираешь с собой не просто покупку, а маленькую авторскую историю.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="makers">
+      <div class="section-head">
+        <h2 class="title">Мастера<br>и товары</h2>
+        <p class="section-note">На главной показываем часть участников, чтобы не превращать страницу в каталог на 50+ карточек. Полный список будет на отдельной странице.</p>
+      </div>
+      <div class="makers-wrap">
+        <div class="makers">
+        
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Лёха</strong><span>3D-печать</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Катя</strong><span>Мыло</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Макс</strong><span>Предметы</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Настя</strong><span>Керамика</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Саша</strong><span>Декор</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Оля</strong><span>Свечи</span></div></article>
+      
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Лёха</strong><span>3D-печать</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Катя</strong><span>Мыло</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Макс</strong><span>Предметы</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Настя</strong><span>Керамика</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Саша</strong><span>Декор</span></div></article>
+        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Оля</strong><span>Свечи</span></div></article>
+        </div>
+      </div>
+      <div class="hero-actions" style="justify-content:center; margin-top:26px;">
+        <a class="btn" href="makers.html">Показать всех →</a>
+      </div>
+    </section>
+
+    <section class="section" id="place">
+      <div class="section-head">
+        <h2 class="title">Где<br>встречаемся</h2>
+        <p class="section-note">Добавим точный адрес, схему прохода и быстрые кнопки для открытия маршрута в 2ГИС и Яндекс Картах.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:stretch;">
+        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:linear-gradient(135deg, rgba(92,120,255,.35), rgba(5,5,5,.8)); display:grid; place-items:center; padding:32px; text-align:center;">
+          
+          <div>
+            <div class="tag" style="margin-bottom:18px;">карта появится позже</div>
+            <h3 class="title" style="font-size:clamp(32px, 5vw, 64px);">Новосибирск</h3>
+            <p style="margin-top:14px; color:rgba(246,246,241,.72); max-width:420px; line-height:1.5;">Когда площадка будет утверждена, здесь появится интерактивная карта.</p>
+          </div>
+        </div>
+
+        <div style="border:1px solid var(--line); border-radius:var(--radius); padding:32px; background:rgba(255,255,255,.04); display:flex; flex-direction:column; justify-content:space-between; gap:24px;">
+          <div>
+            <div class="kicker"><span>Адрес</span> будет позже</div>
+            <p class="lead" style="margin:0;">Сохрани страницу — ближе к мероприятию добавим точную точку, время работы и удобный маршрут.</p>
+          </div>
+          <div class="hero-actions">
+            <a class="btn" href="https://2gis.ru/novosibirsk/search/%D0%A0%D1%83%D0%BA%D0%B0%D0%BC%D0%B8" target="_blank" rel="noopener">Открыть в 2ГИС</a>
+            <a class="btn secondary" href="https://yandex.ru/maps/65/novosibirsk/?text=%D0%A0%D1%83%D0%BA%D0%B0%D0%BC%D0%B8" target="_blank" rel="noopener">Яндекс Карты</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="poster" id="apply">
+      <div class="poster-text">
+        <div class="kicker"><span>Заявка</span> для мастеров</div>
+        <h2 class="title">Принять<br>участие</h2>
+        <p class="lead">Заполни форму — мы свяжемся с тобой и добавим в список участников.</p>
+
+        <form action="https://formspree.io/f/your-id" method="POST" style="margin-top:24px; display:flex; flex-direction:column; gap:12px; max-width:380px;">
+          <input name="name" placeholder="Имя" required style="padding:12px; border:none; border-radius:8px;">
+          <input name="brand" placeholder="Бренд / что делаешь" required style="padding:12px; border:none; border-radius:8px;">
+          <input name="contact" placeholder="Телеграм / телефон" required style="padding:12px; border:none; border-radius:8px;">
+          <input name="instagram" placeholder="Instagram / соцсети" style="padding:12px; border:none; border-radius:8px;">
+          <textarea name="about" placeholder="Коротко о продукте (1–2 предложения)" rows="2" style="padding:12px; border:none; border-radius:8px;"></textarea>
+          <button class="btn" type="submit">Отправить заявку</button>
+        </form>
+      </div>
+      <div class="poster-art">
+        <div class="badge"><span class="tag">участник</span><b>Руками</b><span>№ 0007<br>ручной контроль</span></div>
+        <div class="sticker s1">Микро производство</div>
+        <div class="sticker s2">Без фабрик</div>
+        <div class="sticker s3">Сделано руками</div>
+        <div class="sticker s4">Люди > вещи</div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><div class="logo"><img src="logo.svg" alt="Руками" style="height:48px; filter:invert(1);"></div><p style="margin-top:18px; max-width:280px; line-height:1.5;">Маркет авторских товаров, общения и вдохновения в Новосибирске.</p></div>
+      <div><a href="#about">О движении</a><a href="#process">Процесс</a><a href="#makers">Участники</a><a href="#place">Место</a><a href="#apply">Заявка</a></div>
+      <div><a href="#">Telegram</a><a href="#">ВКонтакте</a><a href="#">Instagram*</a><p style="margin-top:28px;">© 2026 Руками<br>*если он у вас работает</p></div>
+    </footer>
+
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-close" onclick="closeModal()">✕</div>
+    <img id="modal-img" src="" />
+    <h3 id="modal-name"></h3>
+    <p id="modal-role"></p>
+    <a id="modal-link" class="btn" target="_blank">Перейти в соцсети</a>
+  </div>
+</div>
+
+<script>
+function openModal(el) {
+  document.getElementById('modal').classList.add('active');
+  document.getElementById('modal-img').src = el.dataset.img;
+  document.getElementById('modal-name').innerText = el.dataset.name;
+  document.getElementById('modal-role').innerText = el.dataset.role;
+  document.getElementById('modal-link').href = el.dataset.link;
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+}
+</script>
+  </main>
+</body>
+</html>
