@@ -110,8 +110,8 @@
     }
 
     .hero {
-      min-height: 100vh;
-      padding: 128px clamp(20px, 5vw, 72px) 56px;
+      min-height: 940px;
+      padding: 128px clamp(20px, 5vw, 72px) 96px;
       display: grid;
       grid-template-columns: 1.05fr .95fr;
       gap: 48px;
@@ -237,18 +237,20 @@
       grid-template-columns: 1.1fr repeat(4, 1fr);
       gap: 1px;
       border-bottom: 1px solid var(--line);
+      min-height: 221px;
     }
 
     .strip-cell {
-      padding: clamp(28px, 4vw, 54px);
+      padding: 50px 25px;
       border-right: 1px solid rgba(5,5,5,.28);
     }
 
     .strip-cell:first-child {
-      font-family: 'Arial Black', Arial, sans-serif; font-weight: 700;
-      font-size: clamp(38px, 4.5vw, 72px);
-      line-height: .88;
-      letter-spacing: -.04em;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: clamp(28px, 2.9vw, 37px);
+      line-height: 1.2;
+      letter-spacing: 0;
       text-transform: uppercase;
     }
 
@@ -516,7 +518,7 @@
     @media (max-width: 680px) {
       .nav { height: 70px; padding: 18px 18px; }
       .nav .btn { display: none; }
-      .hero { padding-top: 108px; }
+      .hero { min-height: auto; padding-top: 108px; }
       .blue-strip, .process-grid, .footer { grid-template-columns: 1fr; }
       .section-head { align-items: flex-start; flex-direction: column; }
       .process-card { min-height: 300px; }
