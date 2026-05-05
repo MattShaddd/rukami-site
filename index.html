@@ -868,9 +868,31 @@ let makersDown = false;
 let makersStartX = 0;
 let makersScrollLeft = 0;
 let makersDragged = false;
+let makersPaused = false;
+let makersRaf = null;
+let makersLastFrame = 0;
 
 if (makersTrack) {
+  const pauseMakers = () => { makersPaused = true; };
+  const resumeMakers = () => { makersPaused = false; };
+
+  const autoScrollMakers = (timestamp) => {
+    if (!makersLastFrame) makersLastFrame = timestamp;
+    const delta = timestamp - makersLastFrame;
+    makersLastFrame = timestamp;
+
+    if (!makersPaused && !makersDown && makersTrack.scrollWidth > makersTrack.clientWidth) {
+      makersTrack.scrollLeft += delta * 0.018;
+      if (makersTrack.scrollLeft >= makersTrack.scrollWidth - makersTrack.clientWidth - 1) {
+        makersTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      }
+    }
+
+    makersRaf = window.requestAnimationFrame(autoScrollMakers);
+  };
+
   makersTrack.addEventListener('pointerdown', (event) => {
+    pauseMakers();
     makersDown = true;
     makersDragged = false;
     makersStartX = event.clientX;
@@ -890,8 +912,13 @@ if (makersTrack) {
     makersDown = false;
     makersTrack.classList.remove('dragging');
     window.setTimeout(() => { makersDragged = false; }, 0);
+    window.setTimeout(resumeMakers, 900);
   };
 
+  makersTrack.addEventListener('mouseenter', pauseMakers);
+  makersTrack.addEventListener('mouseleave', resumeMakers);
+  makersTrack.addEventListener('touchstart', pauseMakers, { passive: true });
+  makersTrack.addEventListener('touchend', () => window.setTimeout(resumeMakers, 900), { passive: true });
   makersTrack.addEventListener('pointerup', stopMakersDrag);
   makersTrack.addEventListener('pointercancel', stopMakersDrag);
   makersTrack.addEventListener('pointerleave', () => {
@@ -902,7 +929,12 @@ if (makersTrack) {
     if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
     event.preventDefault();
     makersTrack.scrollLeft += event.deltaY;
+    pauseMakers();
+    window.clearTimeout(makersTrack._resumeTimer);
+    makersTrack._resumeTimer = window.setTimeout(resumeMakers, 1200);
   }, { passive: false });
+
+  makersRaf = window.requestAnimationFrame(autoScrollMakers);
 }
 
 function openModal(el) {
