@@ -379,56 +379,91 @@
 
     .process-grid {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
+      gap: clamp(22px, 4vw, 42px);
+      max-width: 980px;
+      margin: 0 auto;
+      padding-bottom: clamp(72px, 10vw, 140px);
     }
 
     .process-card {
-      min-height: 360px;
+      --card-bg: var(--blue);
+      --card-fg: var(--white);
+      min-height: clamp(360px, 56vw, 560px);
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
+      justify-content: center;
+      gap: clamp(18px, 3vw, 30px);
+      padding: clamp(28px, 5vw, 64px);
+      border: 1px solid rgba(246,246,241,.18);
+      border-radius: clamp(22px, 4vw, 44px);
       overflow: hidden;
-      position: relative;
-      background: var(--black-soft);
+      position: sticky;
+      top: var(--stack-top, 96px);
+      background: var(--card-bg);
+      color: var(--card-fg);
     }
 
-    .process-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--img) center/cover;
-      opacity: .52;
-      filter: grayscale(.15) contrast(1.1);
-      transition: transform .5s ease, opacity .5s ease;
+    .process-card:nth-child(1) {
+      --card-bg: var(--yellow);
+      --card-fg: var(--black);
+      --stack-top: 96px;
     }
 
-    .process-card:hover::before { transform: scale(1.07); opacity: .7; }
+    .process-card:nth-child(2) {
+      --card-bg: var(--cyan);
+      --card-fg: var(--black);
+      --stack-top: 114px;
+    }
 
-    .process-card > * { position: relative; z-index: 1; }
+    .process-card:nth-child(3) {
+      --card-bg: var(--red);
+      --card-fg: var(--white);
+      --stack-top: 132px;
+    }
+
+    .process-card:nth-child(4) {
+      --card-bg: var(--violet);
+      --card-fg: var(--black);
+      --stack-top: 150px;
+    }
+
+    .process-card:nth-child(5) {
+      --card-bg: var(--blue);
+      --card-fg: var(--white);
+      --stack-top: 168px;
+    }
 
     .num {
-      color: var(--white);
+      position: absolute;
+      right: clamp(18px, 4vw, 48px);
+      top: clamp(12px, 3vw, 34px);
+      color: var(--card-fg);
+      opacity: .18;
       font-family: 'Arial Black', Arial, sans-serif;
       font-weight: 700;
-      font-size: 42px;
+      font-size: clamp(82px, 16vw, 190px);
       line-height: 1;
-      margin-bottom: 10px;
     }
 
     .process-card h3 {
-      font-size: 18px;
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      color: var(--card-fg);
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-size: clamp(42px, 7vw, 96px);
+      line-height: .9;
       text-transform: uppercase;
-      margin-bottom: 8px;
     }
 
     .process-card p {
-      color: rgba(246,246,241,.74);
-      font-size: 14px;
-      line-height: 1.4;
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      color: var(--card-fg);
+      font-size: clamp(17px, 2vw, 24px);
+      line-height: 1.35;
+      font-weight: 700;
     }
 
     .makers-wrap {
@@ -783,11 +818,11 @@
         <p class="section-note">На маркете можно пройтись между столами, рассмотреть товары, задать вопросы авторам и выбрать вещь, которая подходит именно тебе.</p>
       </div>
       <div class="process-grid">
-        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=800&q=80')"><div class="num">01</div><h3>Приходишь</h3><p>Заходишь на маркет и сразу попадаешь в живую среду авторов.</p></article>
-        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1617529497471-9218633199c0?auto=format&fit=crop&w=800&q=80')"><div class="num">02</div><h3>Смотришь</h3><p>Спокойно осматриваешь столы, материалы, упаковку и детали.</p></article>
-        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1603371928087-00f5c80d0d48?auto=format&fit=crop&w=800&q=80')"><div class="num">03</div><h3>Общаешься</h3><p>Можно поговорить с мастерами и узнать историю каждой вещи.</p></article>
-        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1516216628859-9bccecab13ca?auto=format&fit=crop&w=800&q=80')"><div class="num">04</div><h3>Выбираешь</h3><p>Находишь товар под свой вкус, цвет, настроение или подарок.</p></article>
-        <article class="process-card" style="--img:url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=800&q=80')"><div class="num">05</div><h3>Уносишь</h3><p>Забираешь с собой не просто покупку, а маленькую авторскую историю.</p></article>
+        <article class="process-card"><div class="num">01</div><h3>Приходишь</h3><p>Заходишь на маркет и сразу попадаешь в живую среду авторов.</p></article>
+        <article class="process-card"><div class="num">02</div><h3>Смотришь</h3><p>Спокойно осматриваешь столы, материалы, упаковку и детали.</p></article>
+        <article class="process-card"><div class="num">03</div><h3>Общаешься</h3><p>Можно поговорить с мастерами и узнать историю каждой вещи.</p></article>
+        <article class="process-card"><div class="num">04</div><h3>Выбираешь</h3><p>Находишь товар под свой вкус, цвет, настроение или подарок.</p></article>
+        <article class="process-card"><div class="num">05</div><h3>Уносишь</h3><p>Забираешь с собой не просто покупку, а маленькую авторскую историю.</p></article>
       </div>
     </section>
 
