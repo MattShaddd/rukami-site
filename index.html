@@ -231,41 +231,86 @@
     }
 
     .blue-strip {
-      background: var(--blue);
+      background: var(--white);
       color: #050505;
       display: grid;
-      grid-template-columns: 1.1fr repeat(4, 1fr);
-      gap: 1px;
-      border-bottom: 1px solid var(--line);
-      min-height: 221px;
+      grid-template-columns: minmax(300px, .9fr) minmax(420px, 1.25fr);
+      gap: clamp(36px, 5vw, 72px);
+      align-items: center;
+      padding: clamp(42px, 5vw, 64px) clamp(20px, 5vw, 72px);
+      border-bottom: 1px solid rgba(5,5,5,.18);
     }
 
-    .strip-cell {
-      padding: 50px 25px;
-      border-right: 1px solid rgba(5,5,5,.28);
+    .manifest-copy {
+      max-width: 470px;
     }
 
-    .strip-cell:first-child {
-      font-family: Arial, sans-serif;
-      font-weight: 700;
-      font-size: clamp(28px, 2.9vw, 37px);
-      line-height: 1.2;
-      letter-spacing: 0;
+    .manifest-eyebrow {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      margin-bottom: 18px;
       text-transform: uppercase;
     }
 
-    .strip-cell h3 {
-      font-size: 15px;
-      line-height: 1.1;
+    .manifest-title {
+      font-size: clamp(34px, 4.4vw, 64px);
+      font-weight: 900;
+      line-height: .98;
+      margin-bottom: 18px;
       text-transform: uppercase;
-      margin-bottom: 10px;
+    }
+
+    .manifest-note {
+      color: rgba(5,5,5,.72);
+      font-size: clamp(16px, 1.3vw, 19px);
+      line-height: 1.45;
+      max-width: 410px;
+    }
+
+    .manifest-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .manifest-item {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(5,5,5,.18);
+    }
+
+    .manifest-item:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .manifest-num {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 2px solid #050505;
+      border-radius: 50%;
+      font-size: 13px;
       font-weight: 900;
     }
 
-    .strip-cell p {
-      font-size: 14px;
-      line-height: 1.45;
-      opacity: .75;
+    .manifest-item h3 {
+      font-size: 18px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 900;
+    }
+
+    .manifest-item p {
+      color: rgba(5,5,5,.72);
+      font-size: 15px;
+      line-height: 1.42;
     }
 
     .section {
@@ -597,11 +642,16 @@
     </section>
 
     <section class="blue-strip">
-      <div class="strip-cell">Место, где<br>вещи делают люди.</div>
-      <div class="strip-cell"><h3>Авторы рядом</h3><p>Можно спокойно осмотреть столы и поговорить с мастерами.</p></div>
-      <div class="strip-cell"><h3>На любой вкус</h3><p>Украшения, свечи, керамика, декор, подарки и другие авторские вещи.</p></div>
-      <div class="strip-cell"><h3>Душевное место</h3><p>Приходят не только покупать, но и общаться, вдохновляться, знакомиться.</p></div>
-      <div class="strip-cell"><h3>Сделано руками</h3><p>Каждая вещь проходит через внимание автора, а не через безликую полку.</p></div>
+      <div class="manifest-copy">
+        <div class="manifest-eyebrow">Зачем мы собираемся</div>
+        <h2 class="manifest-title">Место, где покупают не вещь, а историю.</h2>
+        <p class="manifest-note">Теплый маркет для тех, кто делает руками, и тех, кто ищет подарок с характером.</p>
+      </div>
+      <div class="manifest-list">
+        <div class="manifest-item"><span class="manifest-num">01</span><div><h3>Автор рядом</h3><p>Можно поговорить с мастером и узнать, как появилась вещь.</p></div></div>
+        <div class="manifest-item"><span class="manifest-num">02</span><div><h3>Живой выбор</h3><p>Украшения, керамика, свечи, декор и подарки без ощущения витрины.</p></div></div>
+        <div class="manifest-item"><span class="manifest-num">03</span><div><h3>Спокойная прогулка</h3><p>Приходишь смотреть, общаться, вдохновляться и находить свое.</p></div></div>
+      </div>
     </section>
 
     <section class="section" id="process">
