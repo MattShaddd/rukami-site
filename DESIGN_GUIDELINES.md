@@ -5,7 +5,8 @@
 - Core tokens: surface `#050505`, surface-raised `#0B0B0D`, text `#F6F6F1`, inverse text `#050505`.
 - Opacity tokens: `--ink-soft`, `--ink-muted`, `--ink-faint`, `--line`, `--line-soft`, `--paper-faint`, `--paper-soft`, `--scrim`, `--scrim-strong`, `--clear`.
 - Typography tokens must live in `:root` and be reused everywhere. Do not create one-off font sizes, line heights, or tracking values in components.
-- Type scale: `--text-xs`, `--text-sm`, `--text-md`, `--text-lg`, `--text-xl`, `--text-2xl`, `--text-3xl`, `--display-sm`, `--display-md`, `--display-lg`, `--display-xl`, `--display-num`, `--lead-size`, `--card-copy-size`.
+- Type scale: `--text-xs`, `--text-sm`, `--text-md`, `--text-lg`, `--text-xl`, `--text-2xl`, `--text-3xl`, `--section-title-size`, `--card-title-size`, `--brand-title-size`, `--display-num`, `--lead-size`, `--card-copy-size`.
+- Heading hierarchy: brand/logo area uses `--brand-title-size`, section headings use `--section-title-size`, large internal card headings use `--card-title-size`. Do not invent alternate heading sizes.
 - Line-height scale: `--lh-solid`, `--lh-tight`, `--lh-body`, `--lh-copy`, `--lh-relaxed`.
 - Tracking scale: `--tracking-display`, `--tracking-button`, `--tracking-ui`, `--tracking-kicker`.
 - Accent colors are flat fills only: blue `#5C78FF`, red `#F23F43`, coral `#FF6853`, yellow `#FFDA53`, violet `#CA8EFF`, cyan `#45D1F4`.

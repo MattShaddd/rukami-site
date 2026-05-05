@@ -41,11 +41,9 @@
       --text-xl: 18px;
       --text-2xl: 24px;
       --text-3xl: 32px;
-      --display-sm: clamp(36px, 6vw, 72px);
-      --display-md: clamp(42px, 6vw, 88px);
-      --display-lg: clamp(42px, 7vw, 96px);
-      --display-xl: clamp(64px, 10vw, 140px);
-      --display-hero-section: clamp(64px, 7.2vw, 108px);
+      --section-title-size: clamp(52px, 6.8vw, 96px);
+      --card-title-size: clamp(42px, 5.6vw, 80px);
+      --brand-title-size: clamp(64px, 10vw, 140px);
       --display-num: clamp(82px, 16vw, 190px);
       --lead-size: clamp(16px, 1.3vw, 21px);
       --card-copy-size: clamp(17px, 2vw, 24px);
@@ -195,7 +193,7 @@
     .mega {
       font-family: 'Arial Black', Arial, sans-serif;
       font-weight: 700;
-      font-size: var(--display-xl);
+      font-size: var(--brand-title-size);
       line-height: var(--lh-solid);
       letter-spacing: var(--tracking-display);
       text-transform: uppercase;
@@ -286,7 +284,7 @@
 
     .manifest-title {
       font-family: 'Arial Black', Arial, sans-serif;
-      font-size: var(--display-hero-section);
+      font-size: var(--section-title-size);
       font-weight: 900;
       line-height: var(--lh-solid);
       margin-bottom: 40px;
@@ -396,7 +394,7 @@
     .title {
       font-family: 'Arial Black', Arial, sans-serif;
       font-weight: 700;
-      font-size: var(--display-sm);
+      font-size: var(--section-title-size);
       line-height: var(--lh-solid);
       letter-spacing: var(--tracking-display);
       text-transform: uppercase;
@@ -490,7 +488,7 @@
       max-width: 720px;
       color: var(--card-fg);
       font-family: 'Arial Black', Arial, sans-serif;
-      font-size: var(--display-lg);
+      font-size: var(--card-title-size);
       line-height: var(--lh-solid);
       text-transform: uppercase;
     }
@@ -943,7 +941,7 @@
           
           <div>
             <div class="tag" style="margin-bottom:18px;">карта появится позже</div>
-            <h3 class="title" style="font-size:var(--display-sm);">Новосибирск</h3>
+            <h3 class="title" style="font-size:var(--section-title-size);">Новосибирск</h3>
             <p style="margin-top:14px; color:var(--ink-muted); max-width:420px; line-height:var(--lh-relaxed);">Когда площадка будет утверждена, здесь появится интерактивная карта.</p>
           </div>
         </div>
