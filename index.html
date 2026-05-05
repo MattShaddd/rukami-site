@@ -28,10 +28,7 @@
 
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at 14% 2%, rgba(242,63,67,.16), transparent 22rem),
-        radial-gradient(circle at 86% 8%, rgba(92,120,255,.2), transparent 24rem),
-        var(--black);
+      background: var(--black);
       color: var(--white);
       font-family: Inter, Manrope, Montserrat, Arial, sans-serif;
       overflow-x: hidden;
@@ -45,10 +42,12 @@
       z-index: 100;
       opacity: .22;
       background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.1), transparent 1px),
-        radial-gradient(circle at 80% 40%, rgba(69,209,244,.08), transparent 1px),
-        radial-gradient(circle at 42% 72%, rgba(255,218,83,.07), transparent 1px);
-      background-size: 18px 18px, 26px 26px, 34px 34px;
+        url("assets/shapes/star-coral.svg"),
+        url("assets/shapes/circle-violet.svg"),
+        url("assets/shapes/asterisk-cyan.svg");
+      background-position: 7% 14%, 93% 9%, 82% 78%;
+      background-repeat: no-repeat;
+      background-size: 120px 120px, 96px 96px, 110px 110px;
       mix-blend-mode: screen;
     }
 
@@ -71,7 +70,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: linear-gradient(to bottom, rgba(5,5,5,.9), rgba(5,5,5,0));
+      background: rgba(5,5,5,.92);
       backdrop-filter: blur(8px);
     }
 
@@ -114,7 +113,7 @@
     .btn.secondary {
       background: transparent;
       color: var(--white);
-      border-color: rgba(255,218,83,.55);
+      border-color: var(--white);
     }
 
     .hero {
@@ -152,7 +151,6 @@
       top: 178px;
       background-image: url("assets/shapes/sun-yellow.svg");
       opacity: .24;
-      transform: rotate(-14deg);
     }
 
     .hero::after {
@@ -162,7 +160,6 @@
       bottom: 72px;
       background-image: url("assets/shapes/star-coral.svg");
       opacity: .5;
-      transform: rotate(12deg);
     }
 
     .kicker {
@@ -174,7 +171,7 @@
       margin-bottom: 24px;
     }
 
-    .kicker span { color: var(--blue); }
+    .kicker span { color: var(--white); }
 
     h1, h2, h3, p { margin: 0; }
 
@@ -228,10 +225,14 @@
       border: 1px solid var(--line);
       border-radius: var(--radius);
       overflow: hidden;
-      background:
-        linear-gradient(150deg, rgba(92,120,255,.38), rgba(242,63,67,.22) 42%, rgba(5,5,5,.78)),
-        url('https://images.unsplash.com/photo-1603371928087-00f5c80d0d48?auto=format&fit=crop&w=1200&q=80') center/cover;
-      box-shadow: 0 40px 120px rgba(0,0,0,.5);
+      background: url('https://images.unsplash.com/photo-1603371928087-00f5c80d0d48?auto=format&fit=crop&w=1200&q=80') center/cover;
+    }
+
+    .visual-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(5,5,5,.38);
     }
 
     .visual-card::after {
@@ -256,10 +257,9 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      color: var(--yellow);
+      color: var(--white);
       font-size: 54px;
       font-weight: 900;
-      transform: rotate(-12deg);
     }
 
     .tag {
@@ -310,7 +310,6 @@
       pointer-events: none;
       background: url("assets/shapes/asterisk-cyan.svg") center/contain no-repeat;
       opacity: .2;
-      transform: rotate(10deg);
     }
 
     .manifest-copy {
@@ -320,7 +319,7 @@
     }
 
     .manifest-eyebrow {
-      color: var(--yellow);
+      color: var(--white);
       font-size: 13px;
       font-weight: 900;
       letter-spacing: .1em;
@@ -335,7 +334,6 @@
       line-height: .92;
       margin-bottom: 22px;
       text-transform: uppercase;
-      text-shadow: 3px 3px 0 rgba(242,63,67,.72);
     }
 
     .manifest-note {
@@ -365,22 +363,24 @@
 
     .manifest-item:nth-child(1) .manifest-num {
       border-color: var(--red);
-      color: var(--red);
+      background: var(--red);
+      color: var(--black);
     }
 
     .manifest-item:nth-child(2) .manifest-num {
       border-color: var(--cyan);
-      color: var(--cyan);
+      background: var(--cyan);
+      color: var(--black);
     }
 
     .manifest-item:nth-child(3) .manifest-num {
       border-color: var(--yellow);
-      color: var(--yellow);
+      background: var(--yellow);
+      color: var(--black);
     }
 
     .manifest-item:last-child {
-      transform: rotate(-2deg);
-      border-color: rgba(255,218,83,.55);
+      border-color: var(--yellow);
     }
 
     .manifest-num {
@@ -390,7 +390,7 @@
       height: 42px;
       border: 2px solid var(--blue);
       border-radius: 50%;
-      color: var(--coral);
+      color: var(--white);
       font-size: 13px;
       font-weight: 900;
       flex: 0 0 auto;
@@ -432,7 +432,6 @@
       top: 88px;
       background: url("assets/shapes/heart-red.svg") center/contain no-repeat;
       opacity: .22;
-      transform: rotate(-8deg);
       pointer-events: none;
     }
 
@@ -521,7 +520,7 @@
     }
 
     .num {
-      color: var(--yellow);
+      color: var(--white);
       font-family: 'Arial Black', Arial, sans-serif;
       font-weight: 700;
       font-size: 42px;
@@ -560,12 +559,12 @@
 
     .makers-wrap::before {
       left: 0;
-      background: linear-gradient(to right, var(--black), transparent);
+      background: rgba(5,5,5,.86);
     }
 
     .makers-wrap::after {
       right: 0;
-      background: linear-gradient(to left, var(--black), transparent);
+      background: rgba(5,5,5,.86);
     }
 
     .makers {
@@ -651,7 +650,7 @@
 
     .maker-role {
       display: block;
-      color: var(--cyan);
+      color: var(--white);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: .08em;
@@ -710,9 +709,7 @@
       background:
         url("assets/shapes/sun-yellow.svg") left -88px bottom -80px / 270px 270px no-repeat,
         url("assets/shapes/asterisk-cyan.svg") right 8% top 15% / 170px 170px no-repeat,
-        radial-gradient(circle at 28% 28%, rgba(255,218,83,.34), transparent 24%),
-        radial-gradient(circle at 76% 38%, rgba(69,209,244,.28), transparent 26%),
-        linear-gradient(135deg, rgba(242,63,67,.95), rgba(255,104,83,.92) 42%, #070707 42%);
+        var(--red);
       overflow: hidden;
       border-left: 1px solid var(--line);
     }
@@ -726,8 +723,6 @@
       background: var(--yellow);
       color: #050505;
       border-radius: 18px;
-      transform: rotate(-7deg);
-      box-shadow: 0 30px 80px rgba(0,0,0,.55);
       padding: 26px;
       display: flex;
       flex-direction: column;
@@ -755,13 +750,12 @@
       font-weight: 900;
       text-transform: uppercase;
       font-size: 18px;
-      box-shadow: 7px 7px 0 rgba(0,0,0,.45);
     }
 
-    .s1 { right: 12%; top: 17%; transform: rotate(8deg); background: var(--yellow); }
-    .s2 { right: 8%; top: 39%; transform: rotate(-5deg); background: var(--violet); }
-    .s3 { left: 34%; bottom: 14%; transform: rotate(4deg); background: var(--red); }
-    .s4 { right: 22%; bottom: 23%; transform: rotate(-10deg); background: var(--blue); }
+    .s1 { right: 12%; top: 17%; background: var(--yellow); }
+    .s2 { right: 8%; top: 39%; background: var(--violet); }
+    .s3 { left: 34%; bottom: 14%; background: var(--red); }
+    .s4 { right: 22%; bottom: 23%; background: var(--blue); }
 
     .footer {
       padding: 48px clamp(20px, 5vw, 72px);
@@ -829,7 +823,7 @@
     }
 
     #modal-role {
-      color: var(--cyan);
+      color: var(--white);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: .08em;
@@ -980,12 +974,12 @@
       </div>
 
       <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:stretch;">
-        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:url('assets/shapes/circle-violet.svg') right -70px top -70px / 210px 210px no-repeat, url('assets/shapes/star-coral.svg') left -48px bottom -48px / 170px 170px no-repeat, linear-gradient(135deg, rgba(92,120,255,.28), rgba(242,63,67,.28) 45%, rgba(5,5,5,.86)); display:grid; place-items:center; padding:32px; text-align:center;">
+        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:url('assets/shapes/circle-violet.svg') right -70px top -70px / 210px 210px no-repeat, url('assets/shapes/star-coral.svg') left -48px bottom -48px / 170px 170px no-repeat, var(--blue); color:var(--black); display:grid; place-items:center; padding:32px; text-align:center;">
           
           <div>
             <div class="tag" style="margin-bottom:18px;">карта появится позже</div>
             <h3 class="title" style="font-size:clamp(32px, 5vw, 64px);">Новосибирск</h3>
-            <p style="margin-top:14px; color:rgba(246,246,241,.72); max-width:420px; line-height:1.5;">Когда площадка будет утверждена, здесь появится интерактивная карта.</p>
+            <p style="margin-top:14px; color:var(--black); max-width:420px; line-height:1.5;">Когда площадка будет утверждена, здесь появится интерактивная карта.</p>
           </div>
         </div>
 
