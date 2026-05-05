@@ -869,26 +869,20 @@ let makersStartX = 0;
 let makersScrollLeft = 0;
 let makersDragged = false;
 let makersPaused = false;
-let makersRaf = null;
-let makersLastFrame = 0;
+let makersAutoTimer = null;
 
 if (makersTrack) {
   const pauseMakers = () => { makersPaused = true; };
   const resumeMakers = () => { makersPaused = false; };
 
-  const autoScrollMakers = (timestamp) => {
-    if (!makersLastFrame) makersLastFrame = timestamp;
-    const delta = timestamp - makersLastFrame;
-    makersLastFrame = timestamp;
-
+  const autoScrollMakers = () => {
     if (!makersPaused && !makersDown && makersTrack.scrollWidth > makersTrack.clientWidth) {
-      makersTrack.scrollLeft += delta * 0.035;
-      if (makersTrack.scrollLeft >= makersTrack.scrollWidth - makersTrack.clientWidth - 1) {
-        makersTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      const maxScroll = makersTrack.scrollWidth - makersTrack.clientWidth;
+      makersTrack.scrollLeft += 1;
+      if (makersTrack.scrollLeft >= maxScroll - 1) {
+        makersTrack.scrollLeft = 0;
       }
     }
-
-    makersRaf = window.requestAnimationFrame(autoScrollMakers);
   };
 
   makersTrack.addEventListener('pointerdown', (event) => {
@@ -932,7 +926,7 @@ if (makersTrack) {
     makersTrack._resumeTimer = window.setTimeout(resumeMakers, 1200);
   }, { passive: false });
 
-  makersRaf = window.requestAnimationFrame(autoScrollMakers);
+  makersAutoTimer = window.setInterval(autoScrollMakers, 28);
 }
 
 function openModal(el) {
