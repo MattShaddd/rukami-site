@@ -437,50 +437,108 @@
 
     .makers {
       display: flex;
-      gap: 16px;
-      width: max-content;
-      animation: makersMarquee 42s linear infinite;
+      gap: 18px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      scroll-padding: 0 clamp(20px, 5vw, 72px);
+      cursor: grab;
+      user-select: none;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
 
-    .makers-wrap:hover .makers {
-      animation-play-state: paused;
+    .makers::-webkit-scrollbar {
+      display: none;
     }
 
-    @keyframes makersMarquee {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+    .makers.dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+
+    .makers.dragging .maker-card {
+      pointer-events: none;
     }
 
     .maker-card {
-      width: 210px;
-      flex: 0 0 210px;
+      width: min(78vw, 320px);
+      flex: 0 0 min(78vw, 320px);
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.045);
+      scroll-snap-align: start;
+      transition: transform .24s ease, border-color .24s ease, background .24s ease;
+      cursor: pointer;
+    }
+
+    .maker-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(92,120,255,.62);
+      background: rgba(255,255,255,.07);
     }
 
     .maker-photo {
-      aspect-ratio: 1 / 1.12;
+      aspect-ratio: 1.18 / 1;
       background: var(--img) center/cover;
       filter: grayscale(.15) contrast(1.05);
     }
 
-    .maker-info { padding: 16px; }
+    .maker-info {
+      padding: 20px;
+      min-height: 214px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
 
     .maker-info strong {
       display: block;
-      font-size: 18px;
+      font-size: 22px;
       text-transform: uppercase;
     }
 
-    .maker-info span {
+    .maker-role {
       display: block;
-      margin-top: 5px;
       color: var(--blue);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: .08em;
+      font-weight: 900;
+    }
+
+    .maker-desc {
+      color: rgba(246,246,241,.72);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .maker-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .maker-tags span {
+      border: 1px solid rgba(246,246,241,.14);
+      border-radius: 999px;
+      color: rgba(246,246,241,.78);
+      font-size: 11px;
+      letter-spacing: .06em;
+      padding: 7px 9px;
+      text-transform: uppercase;
+    }
+
+    .maker-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
     .poster {
@@ -567,7 +625,7 @@
       .visual-card { min-height: 460px; }
       .blue-strip { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: repeat(2, 1fr); }
-      .maker-card { width: 190px; flex-basis: 190px; }
+      .maker-card { width: min(78vw, 300px); flex-basis: min(78vw, 300px); }
       .poster-art { min-height: 560px; border-left: none; }
       .nav-links { display: none; }
     }
@@ -613,6 +671,22 @@
       width: 100%;
       border-radius: 12px;
       margin-bottom: 16px;
+    }
+
+    #modal-role {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      margin: 8px 0 12px;
+      text-transform: uppercase;
+    }
+
+    #modal-desc {
+      color: rgba(246,246,241,.72);
+      font-size: 14px;
+      line-height: 1.45;
+      margin-bottom: 18px;
     }
 
     .modal-close {
@@ -686,21 +760,31 @@
         <p class="section-note">На главной показываем часть участников, чтобы не превращать страницу в каталог на 50+ карточек. Полный список будет на отдельной странице.</p>
       </div>
       <div class="makers-wrap">
-        <div class="makers">
-        
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Лёха</strong><span>3D-печать</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Катя</strong><span>Мыло</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Макс</strong><span>Предметы</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Настя</strong><span>Керамика</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Саша</strong><span>Декор</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Оля</strong><span>Свечи</span></div></article>
-      
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Лёха</strong><span>3D-печать</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Катя</strong><span>Мыло</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Макс</strong><span>Предметы</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Настя</strong><span>Керамика</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Саша</strong><span>Декор</span></div></article>
-        <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com"><div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80')"></div><div class="maker-info"><strong>Оля</strong><span>Свечи</span></div></article>
+        <div class="makers" aria-label="Карусель участников">
+          <article class="maker-card" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-desc="Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках." data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+            <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80')"></div>
+            <div class="maker-info"><div><strong>Лёха</strong><span class="maker-role">3D-печать</span></div><p class="maker-desc">Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках.</p><div class="maker-tags"><span>пластик</span><span>прототипы</span><span>на заказ</span></div><span class="maker-link">Подробнее →</span></div>
+          </article>
+          <article class="maker-card" onclick="openModal(this)" data-name="Катя" data-role="Мыло" data-desc="Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума." data-img="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+            <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80')"></div>
+            <div class="maker-info"><div><strong>Катя</strong><span class="maker-role">Мыло</span></div><p class="maker-desc">Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума.</p><div class="maker-tags"><span>ароматы</span><span>уход</span><span>подарки</span></div><span class="maker-link">Подробнее →</span></div>
+          </article>
+          <article class="maker-card" onclick="openModal(this)" data-name="Макс" data-role="Предметы" data-desc="Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера." data-img="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+            <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80')"></div>
+            <div class="maker-info"><div><strong>Макс</strong><span class="maker-role">Предметы</span></div><p class="maker-desc">Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера.</p><div class="maker-tags"><span>дом</span><span>стол</span><span>дерево</span></div><span class="maker-link">Подробнее →</span></div>
+          </article>
+          <article class="maker-card" onclick="openModal(this)" data-name="Настя" data-role="Керамика" data-desc="Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная." data-img="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+            <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80')"></div>
+            <div class="maker-info"><div><strong>Настя</strong><span class="maker-role">Керамика</span></div><p class="maker-desc">Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная.</p><div class="maker-tags"><span>глина</span><span>посуда</span><span>ручная лепка</span></div><span class="maker-link">Подробнее →</span></div>
+          </article>
+          <article class="maker-card" onclick="openModal(this)" data-name="Саша" data-role="Декор" data-desc="Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра." data-img="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+            <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80')"></div>
+            <div class="maker-info"><div><strong>Саша</strong><span class="maker-role">Декор</span></div><p class="maker-desc">Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра.</p><div class="maker-tags"><span>интерьер</span><span>текстиль</span><span>постеры</span></div><span class="maker-link">Подробнее →</span></div>
+          </article>
+          <article class="maker-card" onclick="openModal(this)" data-name="Оля" data-role="Свечи" data-desc="Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать." data-img="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+            <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80')"></div>
+            <div class="maker-info"><div><strong>Оля</strong><span class="maker-role">Свечи</span></div><p class="maker-desc">Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать.</p><div class="maker-tags"><span>соевый воск</span><span>ароматы</span><span>уют</span></div><span class="maker-link">Подробнее →</span></div>
+          </article>
         </div>
       </div>
       <div class="hero-actions" style="justify-content:center; margin-top:26px;">
@@ -773,16 +857,61 @@
     <img id="modal-img" src="" />
     <h3 id="modal-name"></h3>
     <p id="modal-role"></p>
+    <p id="modal-desc"></p>
     <a id="modal-link" class="btn" target="_blank">Перейти в соцсети</a>
   </div>
 </div>
 
 <script>
+const makersTrack = document.querySelector('.makers');
+let makersDown = false;
+let makersStartX = 0;
+let makersScrollLeft = 0;
+let makersDragged = false;
+
+if (makersTrack) {
+  makersTrack.addEventListener('pointerdown', (event) => {
+    makersDown = true;
+    makersDragged = false;
+    makersStartX = event.clientX;
+    makersScrollLeft = makersTrack.scrollLeft;
+    makersTrack.classList.add('dragging');
+    makersTrack.setPointerCapture(event.pointerId);
+  });
+
+  makersTrack.addEventListener('pointermove', (event) => {
+    if (!makersDown) return;
+    const distance = event.clientX - makersStartX;
+    if (Math.abs(distance) > 6) makersDragged = true;
+    makersTrack.scrollLeft = makersScrollLeft - distance;
+  });
+
+  const stopMakersDrag = () => {
+    makersDown = false;
+    makersTrack.classList.remove('dragging');
+    window.setTimeout(() => { makersDragged = false; }, 0);
+  };
+
+  makersTrack.addEventListener('pointerup', stopMakersDrag);
+  makersTrack.addEventListener('pointercancel', stopMakersDrag);
+  makersTrack.addEventListener('pointerleave', () => {
+    if (makersDown) stopMakersDrag();
+  });
+
+  makersTrack.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+    event.preventDefault();
+    makersTrack.scrollLeft += event.deltaY;
+  }, { passive: false });
+}
+
 function openModal(el) {
+  if (makersDragged) return;
   document.getElementById('modal').classList.add('active');
   document.getElementById('modal-img').src = el.dataset.img;
   document.getElementById('modal-name').innerText = el.dataset.name;
   document.getElementById('modal-role').innerText = el.dataset.role;
+  document.getElementById('modal-desc').innerText = el.dataset.desc || '';
   document.getElementById('modal-link').href = el.dataset.link;
 }
 
