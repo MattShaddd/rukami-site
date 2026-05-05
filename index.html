@@ -45,6 +45,7 @@
       --display-md: clamp(42px, 6vw, 88px);
       --display-lg: clamp(42px, 7vw, 96px);
       --display-xl: clamp(64px, 10vw, 140px);
+      --display-hero-section: clamp(64px, 7.2vw, 108px);
       --display-num: clamp(82px, 16vw, 190px);
       --lead-size: clamp(16px, 1.3vw, 21px);
       --card-copy-size: clamp(17px, 2vw, 24px);
@@ -155,12 +156,11 @@
     }
 
     .hero {
-      min-height: 860px;
-      padding: 128px clamp(24px, 5vw, 72px) 88px;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: clamp(32px, 5vw, 64px);
+      min-height: 100vh;
+      padding: 150px clamp(24px, 5vw, 72px) 108px;
+      display: flex;
       align-items: center;
+      justify-content: center;
       border-bottom: 1px solid var(--line);
       position: relative;
       overflow: hidden;
@@ -169,6 +169,14 @@
     .hero > * {
       position: relative;
       z-index: 1;
+    }
+
+    .hero-content {
+      width: min(100%, 840px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
     }
 
     .kicker {
@@ -196,8 +204,8 @@
 
     .hero-mark {
       display: block;
-      width: clamp(260px, 38vw, 620px);
-      margin: 8px 0 12px;
+      width: clamp(360px, 50vw, 720px);
+      margin: 0 auto 10px;
     }
 
     .hero-mark img {
@@ -207,8 +215,8 @@
     }
 
     .hero-market {
-      width: clamp(260px, 38vw, 620px);
-      margin: -64px 0 28px;
+      width: clamp(360px, 50vw, 720px);
+      margin: -70px auto 44px;
       text-align: center;
       color: var(--white);
       font-weight: 900;
@@ -219,46 +227,19 @@
     }
 
     .lead {
-      max-width: 520px;
+      max-width: 760px;
       color: var(--ink-soft);
       font-size: var(--lead-size);
       line-height: var(--lh-relaxed);
-      margin: 24px 0 34px;
+      margin: 0 0 72px;
+      font-weight: 800;
     }
 
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-
-    .visual-card {
-      position: relative;
-      min-height: 560px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      background: url('https://images.unsplash.com/photo-1603371928087-00f5c80d0d48?auto=format&fit=crop&w=1200&q=80') center/cover;
-    }
-
-    .visual-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--scrim);
-    }
-
-    .stamp {
-      position: absolute;
-      right: 24px;
-      bottom: 24px;
-      z-index: 2;
-      width: 128px;
-      height: 96px;
-      border: 1px solid var(--white);
-      border-radius: var(--radius-small);
-      background: var(--black);
-      display: grid;
-      place-items: center;
-      color: var(--white);
-      font-size: var(--text-3xl);
-      font-weight: 900;
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .tag {
@@ -278,17 +259,18 @@
       background: var(--black);
       color: var(--white);
       display: grid;
-      grid-template-columns: minmax(320px, 1.1fr) minmax(320px, .8fr);
-      gap: clamp(34px, 5vw, 64px);
+      grid-template-columns: minmax(0, 1.18fr) minmax(360px, .82fr);
+      gap: clamp(48px, 7vw, 104px);
       align-items: center;
-      padding: clamp(52px, 6vw, 84px) clamp(20px, 5vw, 72px);
+      min-height: 680px;
+      padding: clamp(72px, 9vw, 120px) clamp(24px, 5vw, 72px);
       border-bottom: 1px solid var(--line);
       position: relative;
       overflow: hidden;
     }
 
     .manifest-copy {
-      max-width: 680px;
+      max-width: 780px;
       position: relative;
       z-index: 1;
     }
@@ -298,16 +280,16 @@
       font-size: var(--text-sm);
       font-weight: 900;
       letter-spacing: var(--tracking-kicker);
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       text-transform: uppercase;
     }
 
     .manifest-title {
       font-family: 'Arial Black', Arial, sans-serif;
-      font-size: var(--display-md);
+      font-size: var(--display-hero-section);
       font-weight: 900;
       line-height: var(--lh-solid);
-      margin-bottom: 22px;
+      margin-bottom: 40px;
       text-transform: uppercase;
     }
 
@@ -315,12 +297,12 @@
       color: var(--ink-muted);
       font-size: var(--lead-size);
       line-height: var(--lh-copy);
-      max-width: 560px;
+      max-width: 660px;
     }
 
     .manifest-list {
       display: grid;
-      gap: 14px;
+      gap: 16px;
       position: relative;
       z-index: 1;
     }
@@ -328,11 +310,11 @@
     .manifest-item {
       display: flex;
       align-items: center;
-      gap: 16px;
-      min-height: 64px;
-      padding: 14px 18px;
+      gap: 22px;
+      min-height: 92px;
+      padding: 22px 28px;
       border: 1px solid var(--line);
-      border-radius: var(--radius-small);
+      border-radius: var(--radius-card);
       background: var(--black-soft);
       color: var(--white);
     }
@@ -356,14 +338,14 @@
     }
 
     .manifest-item:last-child {
-      border-color: var(--yellow);
+      border-color: var(--blue);
     }
 
     .manifest-num {
       display: grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
+      width: 48px;
+      height: 48px;
       border: 2px solid var(--blue);
       border-radius: 50%;
       color: var(--white);
@@ -376,7 +358,7 @@
       font-size: var(--text-xl);
       line-height: var(--lh-tight);
       text-transform: uppercase;
-      margin-bottom: 0;
+      margin-bottom: 6px;
       font-weight: 900;
     }
 
@@ -748,9 +730,8 @@
     .footer a { display: block; margin-bottom: 12px; text-transform: uppercase; font-size: var(--text-xs); letter-spacing: var(--tracking-ui); }
 
     @media (max-width: 1080px) {
-      .hero, .poster { grid-template-columns: 1fr; }
+      .poster { grid-template-columns: 1fr; }
       #place > div:nth-of-type(2) { grid-template-columns: 1fr !important; }
-      .visual-card { min-height: 460px; }
       .blue-strip { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: none; }
       .maker-card { width: min(78vw, 300px); flex-basis: min(78vw, 300px); }
@@ -761,7 +742,11 @@
     @media (max-width: 680px) {
       .nav { height: 70px; padding: 18px 18px; }
       .nav .btn { display: none; }
-      .hero { min-height: auto; padding-top: 108px; }
+      .hero { min-height: auto; padding-top: 118px; }
+      .hero-mark,
+      .hero-market { width: min(100%, 420px); }
+      .hero-market { margin-top: -42px; margin-bottom: 32px; }
+      .lead { margin-bottom: 40px; }
       .blue-strip, .footer { grid-template-columns: 1fr; }
       .section-head { align-items: flex-start; flex-direction: column; }
       .process-card { min-height: 300px; }
@@ -845,7 +830,7 @@
 
   <main class="page">
     <section class="hero" id="about">
-      <div>
+      <div class="hero-content">
         <div class="hero-mark"><img src="Logo.svg" alt="Руками"></div>
         <div class="hero-market">Маркет</div>
         <p class="lead">Руками маркет — место, где мастера из Новосибирска собираются вместе и продают товары, сделанные своими руками. Для посетителей это душевное место для общения, вдохновения и спокойной прогулки между авторскими столами.</p>
@@ -853,9 +838,6 @@
           <a class="btn" href="#apply">Оставить заявку →</a>
           <a class="btn secondary" href="#process">Смотреть процесс</a>
         </div>
-      </div>
-      <div class="visual-card" aria-label="Процесс ручного производства">
-        <div class="stamp">✌</div>
       </div>
     </section>
 
