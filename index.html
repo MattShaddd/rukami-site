@@ -882,7 +882,7 @@ if (makersTrack) {
     makersLastFrame = timestamp;
 
     if (!makersPaused && !makersDown && makersTrack.scrollWidth > makersTrack.clientWidth) {
-      makersTrack.scrollLeft += delta * 0.018;
+      makersTrack.scrollLeft += delta * 0.035;
       if (makersTrack.scrollLeft >= makersTrack.scrollWidth - makersTrack.clientWidth - 1) {
         makersTrack.scrollTo({ left: 0, behavior: 'smooth' });
       }
@@ -915,8 +915,6 @@ if (makersTrack) {
     window.setTimeout(resumeMakers, 900);
   };
 
-  makersTrack.addEventListener('mouseenter', pauseMakers);
-  makersTrack.addEventListener('mouseleave', resumeMakers);
   makersTrack.addEventListener('touchstart', pauseMakers, { passive: true });
   makersTrack.addEventListener('touchend', () => window.setTimeout(resumeMakers, 900), { passive: true });
   makersTrack.addEventListener('pointerup', stopMakersDrag);
