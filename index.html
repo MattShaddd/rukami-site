@@ -670,6 +670,8 @@
       width: var(--size);
       height: auto;
       object-fit: contain;
+      transform: rotate(var(--angle, 0deg));
+      transform-origin: center;
     }
 
     input,
@@ -688,15 +690,15 @@
       color: rgba(246,246,241,.58);
     }
 
-    .sticker-1 { --size: min(24vw, 180px); left: 3%; top: 4%; }
-    .sticker-2 { --size: min(20vw, 148px); left: 33%; top: 2%; }
-    .sticker-3 { --size: min(26vw, 200px); right: 4%; top: 8%; }
-    .sticker-4 { --size: min(19vw, 142px); left: 10%; top: 38%; }
-    .sticker-5 { --size: min(24vw, 184px); left: 38%; top: 34%; }
-    .sticker-6 { --size: min(18vw, 136px); right: 7%; top: 43%; }
-    .sticker-7 { --size: min(21vw, 158px); left: 18%; bottom: 2%; }
-    .sticker-8 { --size: min(23vw, 176px); right: 25%; bottom: 0; }
-    .sticker-9 { --size: min(35vw, 260px); right: 2%; bottom: 8%; }
+    .sticker-1 { --size: min(24vw, 180px); --angle: -8deg; left: 3%; top: 4%; }
+    .sticker-2 { --size: min(20vw, 148px); --angle: 7deg; left: 33%; top: 2%; }
+    .sticker-3 { --size: min(26vw, 200px); --angle: -5deg; right: 4%; top: 8%; }
+    .sticker-4 { --size: min(19vw, 142px); --angle: 10deg; left: 10%; top: 38%; }
+    .sticker-5 { --size: min(24vw, 184px); --angle: -3deg; left: 38%; top: 34%; }
+    .sticker-6 { --size: min(18vw, 136px); --angle: 8deg; right: 7%; top: 43%; }
+    .sticker-7 { --size: min(21vw, 158px); --angle: -9deg; left: 18%; bottom: 2%; }
+    .sticker-8 { --size: min(23vw, 176px); --angle: 6deg; right: 25%; bottom: 0; }
+    .sticker-9 { --size: min(35vw, 260px); --angle: -4deg; right: 2%; bottom: 8%; }
 
     .footer {
       padding: 48px clamp(20px, 5vw, 72px);

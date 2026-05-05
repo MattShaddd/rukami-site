@@ -9,6 +9,7 @@
 - Exception: edge fade gradients are allowed only as functional masks for horizontal carousels.
 - Avoid colored readable text. Use accent colors for backgrounds, borders, controls, and non-text details.
 - Decorative shapes should not be added on the live site until their placement is resolved in Figma.
+- Real sticker-pack images may be rotated in small angles when used as a sticker-sheet composition.
 - Use spacing from the 4/8/12/16/24/32 rhythm. Keep sections generous, but avoid empty scroll dead zones.
 - Use 12-24px radii consistently. Avoid visually sharp blocks unless the whole section is intentionally editorial and aligned to the layout.
 - Components need visible `:focus-visible` states, hover states, and clear disabled/error states when relevant.
