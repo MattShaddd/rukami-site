@@ -34,23 +34,6 @@
       overflow-x: hidden;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 100;
-      opacity: .22;
-      background-image:
-        url("assets/shapes/star-coral.svg"),
-        url("assets/shapes/circle-violet.svg"),
-        url("assets/shapes/asterisk-cyan.svg");
-      background-position: 7% 14%, 93% 9%, 82% 78%;
-      background-repeat: no-repeat;
-      background-size: 120px 120px, 96px 96px, 110px 110px;
-      mix-blend-mode: screen;
-    }
-
     a { color: inherit; text-decoration: none; }
 
     .page {
@@ -131,35 +114,6 @@
     .hero > * {
       position: relative;
       z-index: 1;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      pointer-events: none;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      z-index: 0;
-    }
-
-    .hero::before {
-      width: clamp(180px, 24vw, 340px);
-      height: clamp(180px, 24vw, 340px);
-      left: clamp(-120px, -8vw, -54px);
-      top: 178px;
-      background-image: url("assets/shapes/sun-yellow.svg");
-      opacity: .24;
-    }
-
-    .hero::after {
-      width: clamp(130px, 18vw, 240px);
-      height: clamp(130px, 18vw, 240px);
-      right: clamp(12px, 4vw, 68px);
-      bottom: 72px;
-      background-image: url("assets/shapes/star-coral.svg");
-      opacity: .5;
     }
 
     .kicker {
@@ -288,30 +242,6 @@
       overflow: hidden;
     }
 
-    .blue-strip::before {
-      content: "";
-      position: absolute;
-      width: clamp(170px, 22vw, 300px);
-      height: clamp(170px, 22vw, 300px);
-      right: clamp(-90px, -5vw, -32px);
-      top: 28px;
-      pointer-events: none;
-      background: url("assets/shapes/circle-violet.svg") center/contain no-repeat;
-      opacity: .26;
-    }
-
-    .blue-strip::after {
-      content: "";
-      position: absolute;
-      width: clamp(120px, 17vw, 220px);
-      height: clamp(120px, 17vw, 220px);
-      left: clamp(12px, 6vw, 92px);
-      bottom: -72px;
-      pointer-events: none;
-      background: url("assets/shapes/asterisk-cyan.svg") center/contain no-repeat;
-      opacity: .2;
-    }
-
     .manifest-copy {
       max-width: 680px;
       position: relative;
@@ -423,18 +353,6 @@
       z-index: 1;
     }
 
-    #makers::before {
-      content: "";
-      position: absolute;
-      width: clamp(140px, 18vw, 230px);
-      height: clamp(140px, 18vw, 230px);
-      right: clamp(-86px, -4vw, -26px);
-      top: 88px;
-      background: url("assets/shapes/heart-red.svg") center/contain no-repeat;
-      opacity: .22;
-      pointer-events: none;
-    }
-
     .section-head {
       display: flex;
       justify-content: space-between;
@@ -491,33 +409,6 @@
     .process-card:hover::before { transform: scale(1.07); opacity: .7; }
 
     .process-card > * { position: relative; z-index: 1; }
-
-    .process-card::after {
-      content: "";
-      position: absolute;
-      inset: auto 18px 18px auto;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: url("assets/shapes/sun-yellow.svg") center/contain no-repeat;
-      opacity: .95;
-      z-index: 1;
-    }
-
-    .process-card:nth-child(2)::after,
-    .process-card:nth-child(5)::after {
-      background-image: url("assets/shapes/asterisk-cyan.svg");
-      border-radius: 0;
-    }
-
-    .process-card:nth-child(3)::after {
-      background-image: url("assets/shapes/star-coral.svg");
-      border-radius: 0;
-    }
-
-    .process-card:nth-child(4)::after {
-      background-image: url("assets/shapes/circle-violet.svg");
-    }
 
     .num {
       color: var(--white);
@@ -706,10 +597,7 @@
 
     .poster-art {
       position: relative;
-      background:
-        url("assets/shapes/sun-yellow.svg") left -88px bottom -80px / 270px 270px no-repeat,
-        url("assets/shapes/asterisk-cyan.svg") right 8% top 15% / 170px 170px no-repeat,
-        var(--red);
+      background: var(--red);
       overflow: hidden;
       border-left: 1px solid var(--line);
     }
@@ -974,7 +862,7 @@
       </div>
 
       <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:stretch;">
-        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:url('assets/shapes/circle-violet.svg') right -70px top -70px / 210px 210px no-repeat, url('assets/shapes/star-coral.svg') left -48px bottom -48px / 170px 170px no-repeat, var(--blue); color:var(--black); display:grid; place-items:center; padding:32px; text-align:center;">
+        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--blue); color:var(--black); display:grid; place-items:center; padding:32px; text-align:center;">
           
           <div>
             <div class="tag" style="margin-bottom:18px;">карта появится позже</div>
