@@ -12,8 +12,11 @@
       --white: #f6f6f1;
       --muted: #9a9a9a;
       --blue: #5C78FF;
-      --red: #ff5f53;
-      --yellow: #ffda53;
+      --cyan: #45D1F4;
+      --violet: #CA8EFF;
+      --red: #F23F43;
+      --coral: #FF6853;
+      --yellow: #FFDA53;
       --line: rgba(246, 246, 241, 0.16);
       --radius: 24px;
       --max: 1440px;
@@ -25,7 +28,10 @@
 
     body {
       margin: 0;
-      background: var(--black);
+      background:
+        radial-gradient(circle at 14% 2%, rgba(242,63,67,.16), transparent 22rem),
+        radial-gradient(circle at 86% 8%, rgba(92,120,255,.2), transparent 24rem),
+        var(--black);
       color: var(--white);
       font-family: Inter, Manrope, Montserrat, Arial, sans-serif;
       overflow-x: hidden;
@@ -39,9 +45,10 @@
       z-index: 100;
       opacity: .22;
       background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.08), transparent 1px),
-        radial-gradient(circle at 80% 40%, rgba(255,255,255,.06), transparent 1px);
-      background-size: 18px 18px, 26px 26px;
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.1), transparent 1px),
+        radial-gradient(circle at 80% 40%, rgba(69,209,244,.08), transparent 1px),
+        radial-gradient(circle at 42% 72%, rgba(255,218,83,.07), transparent 1px);
+      background-size: 18px 18px, 26px 26px, 34px 34px;
       mix-blend-mode: screen;
     }
 
@@ -93,7 +100,7 @@
       padding: 0 22px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: var(--blue);
+      background: var(--red);
       color: #030303;
       font-weight: 900;
       text-transform: uppercase;
@@ -107,6 +114,7 @@
     .btn.secondary {
       background: transparent;
       color: var(--white);
+      border-color: rgba(255,218,83,.55);
     }
 
     .hero {
@@ -118,6 +126,43 @@
       align-items: center;
       border-bottom: 1px solid var(--line);
       position: relative;
+      overflow: hidden;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      z-index: 0;
+    }
+
+    .hero::before {
+      width: clamp(180px, 24vw, 340px);
+      height: clamp(180px, 24vw, 340px);
+      left: clamp(-120px, -8vw, -54px);
+      top: 178px;
+      background-image: url("assets/shapes/sun-yellow.svg");
+      opacity: .24;
+      transform: rotate(-14deg);
+    }
+
+    .hero::after {
+      width: clamp(130px, 18vw, 240px);
+      height: clamp(130px, 18vw, 240px);
+      right: clamp(12px, 4vw, 68px);
+      bottom: 72px;
+      background-image: url("assets/shapes/star-coral.svg");
+      opacity: .5;
+      transform: rotate(12deg);
     }
 
     .kicker {
@@ -184,7 +229,7 @@
       border-radius: var(--radius);
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(92,120,255,.12), rgba(5,5,5,.75)),
+        linear-gradient(150deg, rgba(92,120,255,.38), rgba(242,63,67,.22) 42%, rgba(5,5,5,.78)),
         url('https://images.unsplash.com/photo-1603371928087-00f5c80d0d48?auto=format&fit=crop&w=1200&q=80') center/cover;
       box-shadow: 0 40px 120px rgba(0,0,0,.5);
     }
@@ -195,7 +240,7 @@
       inset: auto 24px 24px auto;
       width: 180px;
       height: 180px;
-      border: 8px solid var(--blue);
+      border: 8px solid var(--yellow);
       border-radius: 50%;
       opacity: .95;
       background: rgba(5,5,5,.55);
@@ -211,7 +256,7 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      color: var(--blue);
+      color: var(--yellow);
       font-size: 54px;
       font-weight: 900;
       transform: rotate(-12deg);
@@ -243,6 +288,31 @@
       overflow: hidden;
     }
 
+    .blue-strip::before {
+      content: "";
+      position: absolute;
+      width: clamp(170px, 22vw, 300px);
+      height: clamp(170px, 22vw, 300px);
+      right: clamp(-90px, -5vw, -32px);
+      top: 28px;
+      pointer-events: none;
+      background: url("assets/shapes/circle-violet.svg") center/contain no-repeat;
+      opacity: .26;
+    }
+
+    .blue-strip::after {
+      content: "";
+      position: absolute;
+      width: clamp(120px, 17vw, 220px);
+      height: clamp(120px, 17vw, 220px);
+      left: clamp(12px, 6vw, 92px);
+      bottom: -72px;
+      pointer-events: none;
+      background: url("assets/shapes/asterisk-cyan.svg") center/contain no-repeat;
+      opacity: .2;
+      transform: rotate(10deg);
+    }
+
     .manifest-copy {
       max-width: 680px;
       position: relative;
@@ -250,7 +320,7 @@
     }
 
     .manifest-eyebrow {
-      color: var(--blue);
+      color: var(--yellow);
       font-size: 13px;
       font-weight: 900;
       letter-spacing: .1em;
@@ -265,6 +335,7 @@
       line-height: .92;
       margin-bottom: 22px;
       text-transform: uppercase;
+      text-shadow: 3px 3px 0 rgba(242,63,67,.72);
     }
 
     .manifest-note {
@@ -292,9 +363,24 @@
       background: var(--black-soft);
     }
 
+    .manifest-item:nth-child(1) .manifest-num {
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .manifest-item:nth-child(2) .manifest-num {
+      border-color: var(--cyan);
+      color: var(--cyan);
+    }
+
+    .manifest-item:nth-child(3) .manifest-num {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
     .manifest-item:last-child {
       transform: rotate(-2deg);
-      border-color: rgba(92,120,255,.55);
+      border-color: rgba(255,218,83,.55);
     }
 
     .manifest-num {
@@ -304,7 +390,7 @@
       height: 42px;
       border: 2px solid var(--blue);
       border-radius: 50%;
-      color: var(--blue);
+      color: var(--coral);
       font-size: 13px;
       font-weight: 900;
       flex: 0 0 auto;
@@ -328,6 +414,26 @@
     .section {
       padding: clamp(72px, 9vw, 132px) clamp(20px, 5vw, 72px);
       border-bottom: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    #makers::before {
+      content: "";
+      position: absolute;
+      width: clamp(140px, 18vw, 230px);
+      height: clamp(140px, 18vw, 230px);
+      right: clamp(-86px, -4vw, -26px);
+      top: 88px;
+      background: url("assets/shapes/heart-red.svg") center/contain no-repeat;
+      opacity: .22;
+      transform: rotate(-8deg);
+      pointer-events: none;
     }
 
     .section-head {
@@ -387,8 +493,35 @@
 
     .process-card > * { position: relative; z-index: 1; }
 
+    .process-card::after {
+      content: "";
+      position: absolute;
+      inset: auto 18px 18px auto;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: url("assets/shapes/sun-yellow.svg") center/contain no-repeat;
+      opacity: .95;
+      z-index: 1;
+    }
+
+    .process-card:nth-child(2)::after,
+    .process-card:nth-child(5)::after {
+      background-image: url("assets/shapes/asterisk-cyan.svg");
+      border-radius: 0;
+    }
+
+    .process-card:nth-child(3)::after {
+      background-image: url("assets/shapes/star-coral.svg");
+      border-radius: 0;
+    }
+
+    .process-card:nth-child(4)::after {
+      background-image: url("assets/shapes/circle-violet.svg");
+    }
+
     .num {
-      color: var(--blue);
+      color: var(--yellow);
       font-family: 'Arial Black', Arial, sans-serif;
       font-weight: 700;
       font-size: 42px;
@@ -492,7 +625,7 @@
 
     .maker-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(92,120,255,.62);
+      border-color: rgba(255,104,83,.72);
       background: rgba(255,255,255,.07);
     }
 
@@ -518,7 +651,7 @@
 
     .maker-role {
       display: block;
-      color: var(--blue);
+      color: var(--cyan);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: .08em;
@@ -574,7 +707,12 @@
 
     .poster-art {
       position: relative;
-      background: radial-gradient(circle at 35% 35%, rgba(92,120,255,.45), transparent 36%), #070707;
+      background:
+        url("assets/shapes/sun-yellow.svg") left -88px bottom -80px / 270px 270px no-repeat,
+        url("assets/shapes/asterisk-cyan.svg") right 8% top 15% / 170px 170px no-repeat,
+        radial-gradient(circle at 28% 28%, rgba(255,218,83,.34), transparent 24%),
+        radial-gradient(circle at 76% 38%, rgba(69,209,244,.28), transparent 26%),
+        linear-gradient(135deg, rgba(242,63,67,.95), rgba(255,104,83,.92) 42%, #070707 42%);
       overflow: hidden;
       border-left: 1px solid var(--line);
     }
@@ -585,7 +723,7 @@
       height: 330px;
       left: 12%;
       top: 18%;
-      background: var(--blue);
+      background: var(--yellow);
       color: #050505;
       border-radius: 18px;
       transform: rotate(-7deg);
@@ -621,7 +759,7 @@
     }
 
     .s1 { right: 12%; top: 17%; transform: rotate(8deg); background: var(--yellow); }
-    .s2 { right: 8%; top: 39%; transform: rotate(-5deg); }
+    .s2 { right: 8%; top: 39%; transform: rotate(-5deg); background: var(--violet); }
     .s3 { left: 34%; bottom: 14%; transform: rotate(4deg); background: var(--red); }
     .s4 { right: 22%; bottom: 23%; transform: rotate(-10deg); background: var(--blue); }
 
@@ -691,7 +829,7 @@
     }
 
     #modal-role {
-      color: var(--blue);
+      color: var(--cyan);
       font-size: 12px;
       font-weight: 900;
       letter-spacing: .08em;
@@ -842,7 +980,7 @@
       </div>
 
       <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:stretch;">
-        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:linear-gradient(135deg, rgba(92,120,255,.35), rgba(5,5,5,.8)); display:grid; place-items:center; padding:32px; text-align:center;">
+        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:url('assets/shapes/circle-violet.svg') right -70px top -70px / 210px 210px no-repeat, url('assets/shapes/star-coral.svg') left -48px bottom -48px / 170px 170px no-repeat, linear-gradient(135deg, rgba(92,120,255,.28), rgba(242,63,67,.28) 45%, rgba(5,5,5,.86)); display:grid; place-items:center; padding:32px; text-align:center;">
           
           <div>
             <div class="tag" style="margin-bottom:18px;">карта появится позже</div>
