@@ -1,14 +1,12 @@
-# Rukami Visual Guidelines
+# Rukami Dark Paper Guidelines
 
-- Keep the site dark: large sections use black or near-black backgrounds. Do not introduce large white sections.
-- Use the brand color set together, not as a one-blue theme: blue `#5C78FF`, red `#F23F43`, coral `#FF6853`, yellow `#FFDA53`, violet `#CA8EFF`, cyan `#45D1F4`.
-- Use red/yellow for confident CTA and poster accents; use blue/cyan/violet as supporting graphic accents.
-- Do not use gradients. Accent colors should be flat fills on sections, buttons, shapes, badges, or small details.
-- Text must not use shadows, strokes, outlines, or colored effects. Readable text and labels must be white or black only.
-- Do not use decorative SVG shapes on the site until the layout is arranged in Figma first.
-- Avoid table-like grids for storytelling sections. No Excel-style equal columns with rigid dividers.
-- Prefer poster-like sections: strong type, open space, a few expressive details, and short human copy.
-- Use cards for makers, products, forms, and framed tools only.
-- Keep buttons pill-shaped. Keep content cards around 18-24px radius.
-- Copy should feel warm, direct, and handmade, not corporate.
-- For visual changes, update Figma first when possible, then sync the site. If Figma tooling is unavailable, keep changes aligned with this guide and sync Figma later.
+- Use a dark paper direction: black surfaces, white ink, clean editorial structure, and flat accent blocks.
+- Tokens: surface `#050505`, surface-raised `#0B0B0D`, text `#F6F6F1`, inverse text `#050505`, border `rgba(246,246,241,0.16)`.
+- Accent colors are flat fills only: blue `#5C78FF`, red `#F23F43`, coral `#FF6853`, yellow `#FFDA53`, violet `#CA8EFF`, cyan `#45D1F4`.
+- Readable text must be white on dark surfaces or black on accent/light surfaces.
+- Do not use gradients, glows, shadows, text shadows, text strokes, or outline effects.
+- Avoid colored readable text. Use accent colors for backgrounds, borders, controls, and non-text details.
+- Decorative shapes should not be added on the live site until their placement is resolved in Figma.
+- Use spacing from the 4/8/12/16/24/32 rhythm. Keep sections generous, but avoid empty scroll dead zones.
+- Components need visible `:focus-visible` states, hover states, and clear disabled/error states when relevant.
+- Copy should stay concise, confident, helpful, and human.

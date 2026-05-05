@@ -19,6 +19,8 @@
       --yellow: #FFDA53;
       --line: rgba(246, 246, 241, 0.16);
       --radius: 24px;
+      --radius-card: 16px;
+      --radius-small: 8px;
       --max: 1440px;
     }
 
@@ -35,6 +37,14 @@
     }
 
     a { color: inherit; text-decoration: none; }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--white);
+      outline-offset: 4px;
+    }
 
     .page {
       width: min(100%, var(--max));
@@ -79,19 +89,22 @@
       justify-content: center;
       gap: 14px;
       min-height: 54px;
-      padding: 0 22px;
+      padding: 0 24px;
       border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--red);
+      border-radius: var(--radius-small);
+      background: var(--white);
       color: #030303;
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .04em;
       font-size: 13px;
-      transition: transform .2s ease, filter .2s ease;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
     }
 
-    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+    .btn:hover {
+      background: var(--yellow);
+      border-color: var(--yellow);
+    }
 
     .btn.secondary {
       background: transparent;
@@ -99,12 +112,18 @@
       border-color: var(--white);
     }
 
+    .btn.secondary:hover {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
     .hero {
-      min-height: 940px;
-      padding: 128px clamp(20px, 5vw, 72px) 96px;
+      min-height: 860px;
+      padding: 128px clamp(24px, 5vw, 72px) 88px;
       display: grid;
       grid-template-columns: 1.05fr .95fr;
-      gap: 48px;
+      gap: clamp(32px, 5vw, 64px);
       align-items: center;
       border-bottom: 1px solid var(--line);
       position: relative;
@@ -175,9 +194,9 @@
 
     .visual-card {
       position: relative;
-      min-height: 620px;
+      min-height: 560px;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border-radius: var(--radius-card);
       overflow: hidden;
       background: url('https://images.unsplash.com/photo-1603371928087-00f5c80d0d48?auto=format&fit=crop&w=1200&q=80') center/cover;
     }
@@ -189,30 +208,20 @@
       background: rgba(5,5,5,.38);
     }
 
-    .visual-card::after {
-      content: "";
-      position: absolute;
-      inset: auto 24px 24px auto;
-      width: 180px;
-      height: 180px;
-      border: 8px solid var(--yellow);
-      border-radius: 50%;
-      opacity: .95;
-      background: rgba(5,5,5,.55);
-    }
-
     .stamp {
       position: absolute;
-      right: 42px;
-      bottom: 90px;
+      right: 24px;
+      bottom: 24px;
       z-index: 2;
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
+      width: 128px;
+      height: 96px;
+      border: 1px solid var(--white);
+      border-radius: var(--radius-small);
+      background: var(--black);
       display: grid;
       place-items: center;
       color: var(--white);
-      font-size: 54px;
+      font-size: 48px;
       font-weight: 900;
     }
 
@@ -222,7 +231,7 @@
       border: 1px solid var(--line);
       background: rgba(246,246,241,.08);
       padding: 8px 12px;
-      border-radius: 999px;
+      border-radius: var(--radius-small);
       color: rgba(246,246,241,.82);
       font-size: 12px;
       text-transform: uppercase;
@@ -230,14 +239,14 @@
     }
 
     .blue-strip {
-      background: var(--black);
-      color: var(--white);
+      background: var(--white);
+      color: var(--black);
       display: grid;
       grid-template-columns: minmax(320px, 1.1fr) minmax(320px, .8fr);
       gap: clamp(34px, 5vw, 64px);
       align-items: center;
       padding: clamp(52px, 6vw, 84px) clamp(20px, 5vw, 72px);
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid var(--white);
       position: relative;
       overflow: hidden;
     }
@@ -249,7 +258,7 @@
     }
 
     .manifest-eyebrow {
-      color: var(--white);
+      color: var(--black);
       font-size: 13px;
       font-weight: 900;
       letter-spacing: .1em;
@@ -267,7 +276,7 @@
     }
 
     .manifest-note {
-      color: rgba(246,246,241,.76);
+      color: rgba(5,5,5,.72);
       font-size: clamp(16px, 1.3vw, 19px);
       line-height: 1.45;
       max-width: 560px;
@@ -286,9 +295,10 @@
       gap: 16px;
       min-height: 64px;
       padding: 14px 18px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--black-soft);
+      border: 1px solid rgba(5,5,5,.18);
+      border-radius: var(--radius-small);
+      background: var(--black);
+      color: var(--white);
     }
 
     .manifest-item:nth-child(1) .manifest-num {
@@ -402,8 +412,8 @@
       justify-content: center;
       gap: clamp(18px, 3vw, 30px);
       padding: clamp(28px, 5vw, 64px);
-      border: 1px solid rgba(246,246,241,.18);
-      border-radius: clamp(22px, 4vw, 44px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
       overflow: hidden;
       position: sticky;
       top: var(--stack-top, 96px);
@@ -415,13 +425,13 @@
     }
 
     .process-card:nth-child(1) {
-      --card-bg: var(--yellow);
+      --card-bg: var(--white);
       --card-fg: var(--black);
       --stack-top: 96px;
     }
 
     .process-card:nth-child(2) {
-      --card-bg: var(--cyan);
+      --card-bg: var(--yellow);
       --card-fg: var(--black);
       --stack-top: 114px;
     }
@@ -433,8 +443,8 @@
     }
 
     .process-card:nth-child(4) {
-      --card-bg: var(--violet);
-      --card-fg: var(--black);
+      --card-bg: var(--black-soft);
+      --card-fg: var(--white);
       --stack-top: 150px;
     }
 
@@ -551,17 +561,16 @@
       width: min(78vw, 320px);
       flex: 0 0 min(78vw, 320px);
       border: 1px solid var(--line);
-      border-radius: 20px;
+      border-radius: var(--radius-card);
       overflow: hidden;
       background: rgba(255,255,255,.045);
       scroll-snap-align: start;
-      transition: transform .24s ease, border-color .24s ease, background .24s ease;
+      transition: border-color .24s ease, background .24s ease;
       cursor: pointer;
     }
 
     .maker-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255,104,83,.72);
+      border-color: var(--white);
       background: rgba(255,255,255,.07);
     }
 
@@ -609,7 +618,7 @@
 
     .maker-tags span {
       border: 1px solid rgba(246,246,241,.14);
-      border-radius: 999px;
+      border-radius: var(--radius-small);
       color: rgba(246,246,241,.78);
       font-size: 11px;
       letter-spacing: .06em;
@@ -643,7 +652,7 @@
 
     .poster-art {
       position: relative;
-      background: var(--red);
+      background: var(--white);
       overflow: hidden;
       border-left: 1px solid var(--line);
     }
@@ -654,9 +663,10 @@
       height: 330px;
       left: 12%;
       top: 18%;
-      background: var(--yellow);
-      color: #050505;
-      border-radius: 18px;
+      background: var(--black);
+      border: 1px solid var(--white);
+      color: var(--white);
+      border-radius: var(--radius-card);
       padding: 26px;
       display: flex;
       flex-direction: column;
@@ -684,12 +694,29 @@
       font-weight: 900;
       text-transform: uppercase;
       font-size: 18px;
+      border-radius: var(--radius-small);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-small);
+      background: var(--black-soft);
+      color: var(--white);
+      font: inherit;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(246,246,241,.58);
     }
 
     .s1 { right: 12%; top: 17%; background: var(--yellow); }
-    .s2 { right: 8%; top: 39%; background: var(--violet); }
-    .s3 { left: 34%; bottom: 14%; background: var(--red); }
-    .s4 { right: 22%; bottom: 23%; background: var(--blue); }
+    .s2 { right: 8%; top: 39%; background: var(--white); }
+    .s3 { left: 34%; bottom: 14%; background: var(--red); color: var(--white); border-color: var(--white); }
+    .s4 { right: 22%; bottom: 23%; background: var(--blue); color: var(--white); border-color: var(--white); }
 
     .footer {
       padding: 48px clamp(20px, 5vw, 72px);
@@ -908,7 +935,7 @@
       </div>
 
       <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:stretch;">
-        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--blue); color:var(--black); display:grid; place-items:center; padding:32px; text-align:center;">
+        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius-card); overflow:hidden; background:var(--white); color:var(--black); display:grid; place-items:center; padding:32px; text-align:center;">
           
           <div>
             <div class="tag" style="margin-bottom:18px;">карта появится позже</div>
@@ -917,7 +944,7 @@
           </div>
         </div>
 
-        <div style="border:1px solid var(--line); border-radius:var(--radius); padding:32px; background:rgba(255,255,255,.04); display:flex; flex-direction:column; justify-content:space-between; gap:24px;">
+        <div style="border:1px solid var(--line); border-radius:var(--radius-card); padding:32px; background:rgba(255,255,255,.04); display:flex; flex-direction:column; justify-content:space-between; gap:24px;">
           <div>
             <div class="kicker"><span>Адрес</span> будет позже</div>
             <p class="lead" style="margin:0;">Сохрани страницу — ближе к мероприятию добавим точную точку, время работы и удобный маршрут.</p>
@@ -937,11 +964,11 @@
         <p class="lead">Заполни форму — мы свяжемся с тобой и добавим в список участников.</p>
 
         <form action="https://formspree.io/f/your-id" method="POST" style="margin-top:24px; display:flex; flex-direction:column; gap:12px; max-width:380px;">
-          <input name="name" placeholder="Имя" required style="padding:12px; border:none; border-radius:8px;">
-          <input name="brand" placeholder="Бренд / что делаешь" required style="padding:12px; border:none; border-radius:8px;">
-          <input name="contact" placeholder="Телеграм / телефон" required style="padding:12px; border:none; border-radius:8px;">
-          <input name="instagram" placeholder="Instagram / соцсети" style="padding:12px; border:none; border-radius:8px;">
-          <textarea name="about" placeholder="Коротко о продукте (1–2 предложения)" rows="2" style="padding:12px; border:none; border-radius:8px;"></textarea>
+          <input name="name" placeholder="Имя" required>
+          <input name="brand" placeholder="Бренд / что делаешь" required>
+          <input name="contact" placeholder="Телеграм / телефон" required>
+          <input name="instagram" placeholder="Instagram / соцсети">
+          <textarea name="about" placeholder="Коротко о продукте (1–2 предложения)" rows="2"></textarea>
           <button class="btn" type="submit">Отправить заявку</button>
         </form>
       </div>
