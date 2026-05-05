@@ -656,46 +656,20 @@
       background: var(--black-soft);
       overflow: hidden;
       border-left: 1px solid var(--line);
+      min-height: 640px;
     }
 
-    .badge {
+    .sticker-board {
       position: absolute;
-      width: 235px;
-      height: 330px;
-      left: 12%;
-      top: 18%;
-      background: var(--yellow);
-      border: 1px solid var(--yellow);
-      color: var(--black);
-      border-radius: var(--radius-card);
-      padding: 26px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      inset: clamp(24px, 5vw, 64px);
     }
 
-    .badge b {
-      font-family: 'Arial Black', Arial, sans-serif; font-weight: 700;
-      font-size: 44px;
-      line-height: .9;
-      letter-spacing: -.03em;
-      text-transform: uppercase;
-    }
-
-    .sticker {
+    .sticker-img {
       position: absolute;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 54px;
-      padding: 0 20px;
-      background: var(--black);
-      color: var(--white);
-      border: 1px solid var(--line);
-      font-weight: 900;
-      text-transform: uppercase;
-      font-size: 18px;
-      border-radius: var(--radius-small);
+      display: block;
+      width: var(--size);
+      height: auto;
+      object-fit: contain;
     }
 
     input,
@@ -714,10 +688,15 @@
       color: rgba(246,246,241,.58);
     }
 
-    .s1 { right: 12%; top: 17%; background: var(--black); }
-    .s2 { right: 8%; top: 39%; background: var(--black); }
-    .s3 { left: 34%; bottom: 14%; background: var(--red); color: var(--white); border-color: var(--red); }
-    .s4 { right: 22%; bottom: 23%; background: var(--blue); color: var(--white); border-color: var(--blue); }
+    .sticker-1 { --size: min(24vw, 180px); left: 3%; top: 4%; }
+    .sticker-2 { --size: min(20vw, 148px); left: 33%; top: 2%; }
+    .sticker-3 { --size: min(26vw, 200px); right: 4%; top: 8%; }
+    .sticker-4 { --size: min(19vw, 142px); left: 10%; top: 38%; }
+    .sticker-5 { --size: min(24vw, 184px); left: 38%; top: 34%; }
+    .sticker-6 { --size: min(18vw, 136px); right: 7%; top: 43%; }
+    .sticker-7 { --size: min(21vw, 158px); left: 18%; bottom: 2%; }
+    .sticker-8 { --size: min(23vw, 176px); right: 25%; bottom: 0; }
+    .sticker-9 { --size: min(35vw, 260px); right: 2%; bottom: 8%; }
 
     .footer {
       padding: 48px clamp(20px, 5vw, 72px);
@@ -748,12 +727,16 @@
       .blue-strip, .footer { grid-template-columns: 1fr; }
       .section-head { align-items: flex-start; flex-direction: column; }
       .process-card { min-height: 300px; }
-      .badge { left: 8%; width: 190px; height: 285px; }
-      .sticker { font-size: 14px; }
-      .s1 { right: 6%; }
-      .s2 { right: 4%; }
-      .s3 { left: 8%; }
-      .s4 { right: 8%; bottom: 12%; }
+      .sticker-board { inset: 18px; }
+      .sticker-1 { --size: 128px; }
+      .sticker-2 { --size: 112px; left: 44%; }
+      .sticker-3 { --size: 142px; }
+      .sticker-4 { --size: 112px; }
+      .sticker-5 { --size: 136px; left: 36%; }
+      .sticker-6 { --size: 104px; }
+      .sticker-7 { --size: 124px; }
+      .sticker-8 { --size: 132px; right: 18%; }
+      .sticker-9 { --size: 188px; }
     }
   
 
@@ -974,11 +957,17 @@
         </form>
       </div>
       <div class="poster-art">
-        <div class="badge"><span class="tag">участник</span><b>Руками</b><span>№ 0007<br>ручной контроль</span></div>
-        <div class="sticker s1">Микро производство</div>
-        <div class="sticker s2">Без фабрик</div>
-        <div class="sticker s3">Сделано руками</div>
-        <div class="sticker s4">Люди > вещи</div>
+        <div class="sticker-board" aria-label="Стикеры Руками">
+          <img class="sticker-img sticker-1" src="assets/stickers/sticker-202.png" alt="">
+          <img class="sticker-img sticker-2" src="assets/stickers/sticker-203.png" alt="">
+          <img class="sticker-img sticker-3" src="assets/stickers/sticker-204.png" alt="">
+          <img class="sticker-img sticker-4" src="assets/stickers/sticker-205.png" alt="">
+          <img class="sticker-img sticker-5" src="assets/stickers/sticker-206.png" alt="">
+          <img class="sticker-img sticker-6" src="assets/stickers/sticker-207.png" alt="">
+          <img class="sticker-img sticker-7" src="assets/stickers/sticker-210.png" alt="">
+          <img class="sticker-img sticker-8" src="assets/stickers/sticker-214.png" alt="">
+          <img class="sticker-img sticker-9" src="assets/stickers/sticker-wide.png" alt="">
+        </div>
       </div>
     </section>
 
