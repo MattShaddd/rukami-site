@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -10,6 +10,8 @@
       --black: #050505;
       --black-soft: #0b0b0d;
       --white: #f6f6f1;
+      --ink: #f6f6f1;
+      --paper: #050505;
       --muted: #9a9a9a;
       --blue: #5C78FF;
       --cyan: #45D1F4;
@@ -17,7 +19,17 @@
       --red: #F23F43;
       --coral: #FF6853;
       --yellow: #FFDA53;
-      --line: rgba(246, 246, 241, 0.16);
+      --ink-soft: rgba(246,246,241,.82);
+      --ink-muted: rgba(246,246,241,.72);
+      --ink-faint: rgba(246,246,241,.58);
+      --line: rgba(246,246,241,.16);
+      --line-soft: rgba(246,246,241,.08);
+      --paper-faint: rgba(255,255,255,.04);
+      --paper-soft: rgba(255,255,255,.08);
+      --paper-nav: rgba(5,5,5,.92);
+      --scrim: rgba(5,5,5,.38);
+      --scrim-strong: rgba(0,0,0,.72);
+      --clear: rgba(5,5,5,0);
       --radius: 24px;
       --radius-card: 20px;
       --radius-small: 12px;
@@ -63,7 +75,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(5,5,5,.92);
+      background: var(--paper-nav);
       backdrop-filter: blur(8px);
     }
 
@@ -80,7 +92,7 @@
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: .08em;
-      color: rgba(246,246,241,.78);
+      color: var(--ink-muted);
     }
 
     .btn {
@@ -93,7 +105,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-small);
       background: var(--white);
-      color: #030303;
+      color: var(--black);
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .04em;
@@ -136,7 +148,7 @@
     }
 
     .kicker {
-      color: rgba(246,246,241,.7);
+      color: var(--ink-muted);
       text-transform: uppercase;
       letter-spacing: .12em;
       font-weight: 800;
@@ -184,7 +196,7 @@
 
     .lead {
       max-width: 520px;
-      color: rgba(246,246,241,.82);
+      color: var(--ink-soft);
       font-size: clamp(16px, 1.35vw, 21px);
       line-height: 1.5;
       margin: 24px 0 34px;
@@ -205,7 +217,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(5,5,5,.38);
+      background: var(--scrim);
     }
 
     .stamp {
@@ -229,10 +241,10 @@
       display: inline-flex;
       align-items: center;
       border: 1px solid var(--line);
-      background: rgba(246,246,241,.08);
+      background: var(--line-soft);
       padding: 8px 12px;
       border-radius: var(--radius-small);
-      color: rgba(246,246,241,.82);
+      color: var(--ink-soft);
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: .08em;
@@ -276,7 +288,7 @@
     }
 
     .manifest-note {
-      color: rgba(246,246,241,.76);
+      color: var(--ink-muted);
       font-size: clamp(16px, 1.3vw, 19px);
       line-height: 1.45;
       max-width: 560px;
@@ -345,7 +357,7 @@
     }
 
     .manifest-item p {
-      color: rgba(246,246,241,.76);
+      color: var(--ink-muted);
       font-size: 14px;
       line-height: 1.35;
       margin-top: 5px;
@@ -386,7 +398,7 @@
 
     .section-note {
       max-width: 420px;
-      color: rgba(246,246,241,.66);
+      color: var(--ink-faint);
       line-height: 1.55;
       font-size: 15px;
     }
@@ -506,12 +518,12 @@
 
     .makers-wrap::before {
       left: 0;
-      background: linear-gradient(to right, var(--black), rgba(5,5,5,0));
+      background: linear-gradient(to right, var(--black), var(--clear));
     }
 
     .makers-wrap::after {
       right: 0;
-      background: linear-gradient(to left, var(--black), rgba(5,5,5,0));
+      background: linear-gradient(to left, var(--black), var(--clear));
     }
 
     .makers {
@@ -564,7 +576,7 @@
       border: 1px solid var(--line);
       border-radius: var(--radius-card);
       overflow: hidden;
-      background: rgba(255,255,255,.045);
+      background: var(--paper-faint);
       scroll-snap-align: start;
       transition: border-color .24s ease, background .24s ease;
       cursor: pointer;
@@ -572,7 +584,7 @@
 
     .maker-card:hover {
       border-color: var(--white);
-      background: rgba(255,255,255,.07);
+      background: var(--paper-soft);
     }
 
     .maker-photo {
@@ -605,7 +617,7 @@
     }
 
     .maker-desc {
-      color: rgba(246,246,241,.72);
+      color: var(--ink-muted);
       font-size: 14px;
       line-height: 1.45;
     }
@@ -618,9 +630,9 @@
     }
 
     .maker-tags span {
-      border: 1px solid rgba(246,246,241,.14);
+      border: 1px solid var(--line);
       border-radius: var(--radius-small);
-      color: rgba(246,246,241,.78);
+      color: var(--ink-muted);
       font-size: 11px;
       letter-spacing: .06em;
       padding: 7px 9px;
@@ -687,7 +699,7 @@
 
     input::placeholder,
     textarea::placeholder {
-      color: rgba(246,246,241,.58);
+      color: var(--ink-faint);
     }
 
     .sticker-1 { --size: min(24vw, 180px); --angle: -8deg; left: 3%; top: 4%; }
@@ -705,7 +717,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 32px;
-      color: rgba(246,246,241,.65);
+      color: var(--ink-faint);
       font-size: 14px;
     }
 
@@ -745,7 +757,7 @@
     .modal {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.7);
+      background: var(--scrim-strong);
       display: none;
       align-items: center;
       justify-content: center;
@@ -755,7 +767,7 @@
     .modal.active { display: flex; }
 
     .modal-card {
-      background: #0b0b0d;
+      background: var(--black-soft);
       border: 1px solid var(--line);
       border-radius: 20px;
       padding: 24px;
@@ -779,7 +791,7 @@
     }
 
     #modal-desc {
-      color: rgba(246,246,241,.72);
+      color: var(--ink-muted);
       font-size: 14px;
       line-height: 1.45;
       margin-bottom: 18px;
@@ -926,11 +938,11 @@
           <div>
             <div class="tag" style="margin-bottom:18px;">карта появится позже</div>
             <h3 class="title" style="font-size:clamp(32px, 5vw, 64px);">Новосибирск</h3>
-            <p style="margin-top:14px; color:rgba(246,246,241,.72); max-width:420px; line-height:1.5;">Когда площадка будет утверждена, здесь появится интерактивная карта.</p>
+            <p style="margin-top:14px; color:var(--ink-muted); max-width:420px; line-height:1.5;">Когда площадка будет утверждена, здесь появится интерактивная карта.</p>
           </div>
         </div>
 
-        <div style="border:1px solid var(--line); border-radius:var(--radius-card); padding:32px; background:rgba(255,255,255,.04); display:flex; flex-direction:column; justify-content:space-between; gap:24px;">
+        <div style="border:1px solid var(--line); border-radius:var(--radius-card); padding:32px; background:var(--paper-faint); display:flex; flex-direction:column; justify-content:space-between; gap:24px;">
           <div>
             <div class="kicker"><span>Адрес</span> будет позже</div>
             <p class="lead" style="margin:0;">Сохрани страницу — ближе к мероприятию добавим точную точку, время работы и удобный маршрут.</p>

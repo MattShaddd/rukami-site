@@ -1,7 +1,9 @@
 # Rukami Dark Paper Guidelines
 
 - Use a dark paper direction: black surfaces, white ink, clean editorial structure, and flat accent blocks.
-- Tokens: surface `#050505`, surface-raised `#0B0B0D`, text `#F6F6F1`, inverse text `#050505`, border `rgba(246,246,241,0.16)`.
+- Color tokens must live in `:root` and be reused everywhere. Do not create one-off opacity values in component CSS.
+- Core tokens: surface `#050505`, surface-raised `#0B0B0D`, text `#F6F6F1`, inverse text `#050505`.
+- Opacity tokens: `--ink-soft`, `--ink-muted`, `--ink-faint`, `--line`, `--line-soft`, `--paper-faint`, `--paper-soft`, `--scrim`, `--scrim-strong`, `--clear`.
 - Accent colors are flat fills only: blue `#5C78FF`, red `#F23F43`, coral `#FF6853`, yellow `#FFDA53`, violet `#CA8EFF`, cyan `#45D1F4`.
 - Readable text must be white on dark surfaces or black on accent/light surfaces.
 - Do not use large white section backgrounds by default. White is for text, primary controls, or deliberate small paper cards with clear purpose.
