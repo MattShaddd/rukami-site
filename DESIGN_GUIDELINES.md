@@ -6,6 +6,7 @@
 - Readable text must be white on dark surfaces or black on accent/light surfaces.
 - Do not use large white section backgrounds by default. White is for text, primary controls, or deliberate small paper cards with clear purpose.
 - Do not use gradients, glows, shadows, text shadows, text strokes, or outline effects.
+- Exception: edge fade gradients are allowed only as functional masks for horizontal carousels.
 - Avoid colored readable text. Use accent colors for backgrounds, borders, controls, and non-text details.
 - Decorative shapes should not be added on the live site until their placement is resolved in Figma.
 - Use spacing from the 4/8/12/16/24/32 rhythm. Keep sections generous, but avoid empty scroll dead zones.

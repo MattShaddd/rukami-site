@@ -506,12 +506,12 @@
 
     .makers-wrap::before {
       left: 0;
-      background: rgba(5,5,5,.86);
+      background: linear-gradient(to right, var(--black), rgba(5,5,5,0));
     }
 
     .makers-wrap::after {
       right: 0;
-      background: rgba(5,5,5,.86);
+      background: linear-gradient(to left, var(--black), rgba(5,5,5,0));
     }
 
     .makers {
@@ -543,6 +543,7 @@
       display: flex;
       gap: 18px;
       width: max-content;
+      --makers-loop-distance: 50%;
       animation: makersAuto 52s linear infinite;
       will-change: transform;
     }
@@ -554,7 +555,7 @@
 
     @keyframes makersAuto {
       from { transform: translateX(0); }
-      to { transform: translateX(calc(-50% - 9px)); }
+      to { transform: translateX(calc(var(--makers-loop-distance) * -1)); }
     }
 
     .maker-card {
@@ -1001,6 +1002,7 @@
 <script>
 const processCards = Array.from(document.querySelectorAll('.process-card'));
 const makersTrack = document.querySelector('.makers');
+const makersInner = document.querySelector('.makers-track');
 let makersDown = false;
 let makersStartX = 0;
 let makersScrollLeft = 0;
@@ -1047,6 +1049,36 @@ if (processCards.length) {
 if (makersTrack) {
   const pauseMakers = () => { makersTrack.classList.add('paused'); };
   const resumeMakers = () => { makersTrack.classList.remove('paused'); };
+  const originalMakers = makersInner ? Array.from(makersInner.querySelectorAll('.maker-card:not([aria-hidden="true"])')) : [];
+
+  const rebuildMakersLoop = () => {
+    if (!makersInner || !originalMakers.length) return;
+
+    makersInner.querySelectorAll('.maker-card[aria-hidden="true"]').forEach((card) => card.remove());
+
+    const appendCloneSet = () => {
+      originalMakers.forEach((card) => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone.tabIndex = -1;
+        makersInner.appendChild(clone);
+      });
+    };
+
+    appendCloneSet();
+
+    while (makersInner.scrollWidth < makersTrack.clientWidth * 3) {
+      appendCloneSet();
+    }
+
+    const first = originalMakers[0];
+    const last = originalMakers[originalMakers.length - 1];
+    const loopDistance = last.offsetLeft + last.offsetWidth - first.offsetLeft + parseFloat(getComputedStyle(makersInner).gap || 0);
+    makersInner.style.setProperty('--makers-loop-distance', `${loopDistance}px`);
+  };
+
+  rebuildMakersLoop();
+  window.addEventListener('resize', rebuildMakersLoop);
 
   makersTrack.addEventListener('pointerdown', (event) => {
     pauseMakers();
