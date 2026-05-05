@@ -231,18 +231,33 @@
     }
 
     .blue-strip {
-      background: var(--white);
-      color: #050505;
+      background: var(--black);
+      color: var(--white);
       display: grid;
-      grid-template-columns: minmax(300px, .9fr) minmax(420px, 1.25fr);
-      gap: clamp(36px, 5vw, 72px);
+      grid-template-columns: minmax(320px, 1.1fr) minmax(320px, .8fr);
+      gap: clamp(34px, 5vw, 64px);
       align-items: center;
-      padding: clamp(42px, 5vw, 64px) clamp(20px, 5vw, 72px);
-      border-bottom: 1px solid rgba(5,5,5,.18);
+      padding: clamp(52px, 6vw, 84px) clamp(20px, 5vw, 72px);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blue-strip::before {
+      content: "";
+      position: absolute;
+      inset: auto 8% -120px auto;
+      width: 360px;
+      height: 360px;
+      border: 2px solid rgba(92,120,255,.7);
+      border-radius: 50%;
+      opacity: .55;
     }
 
     .manifest-copy {
-      max-width: 470px;
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
     }
 
     .manifest-eyebrow {
@@ -255,37 +270,42 @@
     }
 
     .manifest-title {
-      font-size: clamp(34px, 4.4vw, 64px);
+      font-family: 'Arial Black', Arial, sans-serif;
+      font-size: clamp(42px, 6vw, 88px);
       font-weight: 900;
-      line-height: .98;
-      margin-bottom: 18px;
+      line-height: .92;
+      margin-bottom: 22px;
       text-transform: uppercase;
     }
 
     .manifest-note {
-      color: rgba(5,5,5,.72);
+      color: rgba(246,246,241,.76);
       font-size: clamp(16px, 1.3vw, 19px);
       line-height: 1.45;
-      max-width: 410px;
+      max-width: 560px;
     }
 
     .manifest-list {
       display: grid;
       gap: 14px;
+      position: relative;
+      z-index: 1;
     }
 
     .manifest-item {
-      display: grid;
-      grid-template-columns: 52px 1fr;
-      gap: 18px;
-      align-items: start;
-      padding-bottom: 14px;
-      border-bottom: 1px solid rgba(5,5,5,.18);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 64px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--black-soft);
     }
 
     .manifest-item:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
+      transform: rotate(-2deg);
+      border-color: rgba(92,120,255,.55);
     }
 
     .manifest-num {
@@ -293,24 +313,40 @@
       place-items: center;
       width: 42px;
       height: 42px;
-      border: 2px solid #050505;
+      border: 2px solid var(--blue);
       border-radius: 50%;
+      color: var(--blue);
       font-size: 13px;
       font-weight: 900;
+      flex: 0 0 auto;
     }
 
     .manifest-item h3 {
       font-size: 18px;
       line-height: 1.1;
       text-transform: uppercase;
-      margin-bottom: 6px;
+      margin-bottom: 0;
       font-weight: 900;
     }
 
     .manifest-item p {
-      color: rgba(5,5,5,.72);
-      font-size: 15px;
-      line-height: 1.42;
+      color: rgba(246,246,241,.76);
+      font-size: 14px;
+      line-height: 1.35;
+      margin-top: 5px;
+    }
+
+    .manifest-stamp {
+      justify-self: start;
+      margin-top: 6px;
+      padding: 14px 18px;
+      background: var(--blue);
+      color: #050505;
+      border: 2px solid #050505;
+      box-shadow: 7px 7px 0 rgba(0,0,0,.45);
+      font-weight: 900;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
     }
 
     .section {
@@ -553,7 +589,7 @@
       .hero, .poster { grid-template-columns: 1fr; }
       #place > div:nth-of-type(2) { grid-template-columns: 1fr !important; }
       .visual-card { min-height: 460px; }
-      .blue-strip { grid-template-columns: 1fr 1fr; }
+      .blue-strip { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: repeat(2, 1fr); }
       .maker-card { width: 190px; flex-basis: 190px; }
       .poster-art { min-height: 560px; border-left: none; }
@@ -643,14 +679,15 @@
 
     <section class="blue-strip">
       <div class="manifest-copy">
-        <div class="manifest-eyebrow">Зачем мы собираемся</div>
-        <h2 class="manifest-title">Место, где покупают не вещь, а историю.</h2>
-        <p class="manifest-note">Теплый маркет для тех, кто делает руками, и тех, кто ищет подарок с характером.</p>
+        <div class="manifest-eyebrow">Не витрина. Живая встреча.</div>
+        <h2 class="manifest-title">Здесь вещь держит след рук.</h2>
+        <p class="manifest-note">Мастера рядом, истории рядом, выбор спокойный. Можно смотреть, спрашивать и находить подарки, которые не выглядят случайными.</p>
       </div>
       <div class="manifest-list">
-        <div class="manifest-item"><span class="manifest-num">01</span><div><h3>Автор рядом</h3><p>Можно поговорить с мастером и узнать, как появилась вещь.</p></div></div>
-        <div class="manifest-item"><span class="manifest-num">02</span><div><h3>Живой выбор</h3><p>Украшения, керамика, свечи, декор и подарки без ощущения витрины.</p></div></div>
-        <div class="manifest-item"><span class="manifest-num">03</span><div><h3>Спокойная прогулка</h3><p>Приходишь смотреть, общаться, вдохновляться и находить свое.</p></div></div>
+        <div class="manifest-item"><span class="manifest-num">01</span><div><h3>Поговорить с автором</h3><p>Узнать, как появилась вещь, из чего она сделана и почему именно так.</p></div></div>
+        <div class="manifest-item"><span class="manifest-num">02</span><div><h3>Увидеть детали</h3><p>Материалы, фактуры, упаковка и маленькие решения, которые не видно на витрине.</p></div></div>
+        <div class="manifest-item"><span class="manifest-num">03</span><div><h3>Выбрать с характером</h3><p>Подарок или вещь для себя, у которой есть настроение и человек за ней.</p></div></div>
+        <div class="manifest-stamp">Без фабричного шума</div>
       </div>
     </section>
 
