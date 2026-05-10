@@ -162,10 +162,9 @@
     .hero {
       min-height: 92vh;
       padding: 128px clamp(24px, 5vw, 72px) 72px;
-      display: grid;
-      grid-template-columns: minmax(0, .95fr) minmax(360px, .75fr);
-      gap: clamp(32px, 6vw, 96px);
+      display: flex;
       align-items: center;
+      justify-content: center;
       border-bottom: 1px solid var(--line);
       position: relative;
       overflow: hidden;
@@ -180,15 +179,8 @@
       width: min(100%, 820px);
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
       text-align: left;
-    }
-
-    .hero-aside {
-      display: grid;
-      gap: 16px;
-      align-self: stretch;
-      align-content: center;
     }
 
     .kicker {
@@ -217,7 +209,7 @@
     .hero-mark {
       display: block;
       width: min(100%, 620px);
-      margin: 0 0 10px;
+      margin: 0 auto 10px;
     }
 
     .hero-mark img {
@@ -228,7 +220,7 @@
 
     .hero-market {
       width: min(100%, 620px);
-      margin: -52px 0 32px;
+      margin: -52px auto 32px;
       text-align: center;
       color: var(--white);
       font-weight: 900;
@@ -251,7 +243,7 @@
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: center;
     }
 
     .event-facts {
@@ -288,67 +280,6 @@
       text-transform: uppercase;
     }
 
-    .hero-panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-card);
-      background: var(--black-soft);
-      overflow: hidden;
-    }
-
-    .hero-panel-main {
-      aspect-ratio: 1.08 / 1;
-      background: var(--img) center/cover;
-      filter: grayscale(.12) contrast(1.05);
-    }
-
-    .hero-panel-body {
-      padding: 22px;
-    }
-
-    .hero-panel-title {
-      display: block;
-      font-size: var(--text-2xl);
-      line-height: var(--lh-tight);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .hero-panel-body p {
-      color: var(--ink-muted);
-      font-size: var(--text-md);
-      line-height: var(--lh-copy);
-    }
-
-    .hero-mini-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .hero-mini {
-      min-height: 148px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-card);
-      background: var(--img) center/cover;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .hero-mini span {
-      position: absolute;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      padding: 8px 10px;
-      border-radius: var(--radius-small);
-      background: var(--scrim-strong);
-      color: var(--white);
-      font-size: var(--text-xs);
-      font-weight: 900;
-      letter-spacing: var(--tracking-ui);
-      text-transform: uppercase;
-    }
-
     .tag {
       display: inline-flex;
       align-items: center;
@@ -360,68 +291,6 @@
       font-size: var(--text-xs);
       text-transform: uppercase;
       letter-spacing: var(--tracking-ui);
-    }
-
-    .feature-strip {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      border-bottom: 1px solid var(--line);
-      background: var(--black);
-    }
-
-    .feature-card {
-      min-height: 320px;
-      padding: clamp(24px, 4vw, 48px);
-      border-right: 1px solid var(--line);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .feature-card:last-child {
-      border-right: 0;
-    }
-
-    .feature-card:nth-child(2) {
-      background: var(--cyan);
-      color: var(--black);
-    }
-
-    .feature-card:nth-child(3) {
-      background: var(--yellow);
-      color: var(--black);
-    }
-
-    .feature-card:nth-child(4) {
-      background: var(--blue);
-      color: var(--white);
-    }
-
-    .feature-card span {
-      color: currentColor;
-      opacity: .62;
-      font-size: var(--text-xs);
-      font-weight: 900;
-      letter-spacing: var(--tracking-ui);
-      text-transform: uppercase;
-    }
-
-    .feature-card strong {
-      display: block;
-      font-family: 'Arial Black', Arial, sans-serif;
-      font-size: clamp(28px, 3.3vw, 44px);
-      line-height: var(--lh-solid);
-      text-transform: uppercase;
-      overflow-wrap: anywhere;
-    }
-
-    .feature-card p {
-      color: currentColor;
-      opacity: .78;
-      font-size: var(--text-md);
-      line-height: var(--lh-copy);
-      font-weight: 800;
     }
 
     .blue-strip {
@@ -834,53 +703,6 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .visitor-cta {
-      display: grid;
-      grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
-      gap: clamp(28px, 5vw, 72px);
-      align-items: center;
-      padding: clamp(72px, 9vw, 120px) clamp(20px, 5vw, 72px);
-      border-bottom: 1px solid var(--line);
-      background: var(--black-soft);
-    }
-
-    .visitor-actions {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .visitor-action {
-      min-height: 190px;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-card);
-      background: var(--black);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: background .2s ease, border-color .2s ease;
-    }
-
-    .visitor-action:hover {
-      background: var(--paper-soft);
-      border-color: var(--white);
-    }
-
-    .visitor-action span {
-      color: var(--ink-faint);
-      font-size: var(--text-xs);
-      font-weight: 900;
-      letter-spacing: var(--tracking-ui);
-      text-transform: uppercase;
-    }
-
-    .visitor-action strong {
-      font-size: var(--text-2xl);
-      line-height: var(--lh-tight);
-      text-transform: uppercase;
-    }
-
     .poster-text {
       padding: clamp(42px, 7vw, 90px) clamp(20px, 5vw, 72px);
       display: flex;
@@ -983,13 +805,8 @@
     }
 
     @media (max-width: 1080px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-aside { grid-template-columns: minmax(0, 1fr) minmax(0, .82fr); }
-      .feature-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .feature-card:nth-child(2) { border-right: 0; }
       .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .poster { grid-template-columns: 1fr; }
-      .visitor-cta { grid-template-columns: 1fr; }
       #place > div:nth-of-type(2) { grid-template-columns: 1fr !important; }
       .blue-strip { grid-template-columns: 1fr; }
       .maker-card { width: min(78vw, 300px); flex-basis: min(78vw, 300px); }
@@ -1013,17 +830,11 @@
       .hero-mark,
       .hero-market { width: min(100%, 342px); }
       .hero-market { margin-top: -34px; margin-bottom: 28px; }
-      .hero-aside { grid-template-columns: 1fr; }
-      .hero-mini-grid,
       .event-facts,
-      .feature-strip,
-      .process-grid,
-      .visitor-actions {
+      .process-grid {
         grid-template-columns: 1fr;
       }
       .event-fact { min-height: auto; }
-      .feature-card { min-height: 220px; border-right: 0; border-bottom: 1px solid var(--line); }
-      .feature-card:last-child { border-bottom: 0; }
       .lead { margin-bottom: 28px; }
       .hero-actions { width: 100%; }
       .hero-actions .btn { flex: 1 1 100%; }
@@ -1034,7 +845,6 @@
         min-height: 220px;
         position: relative;
       }
-      .visitor-action { min-height: 148px; }
       .makers-wrap::before,
       .makers-wrap::after { width: 44px; }
       .modal-card { max-height: calc(100vh - 32px); overflow: auto; }
@@ -1117,7 +927,7 @@
       <a href="#place">Место</a>
       <a href="#apply">Заявка</a>
     </div>
-    <a class="btn" href="#visitor">Хочу прийти ↗</a>
+    <a class="btn" href="#process">Хочу прийти ↗</a>
   </nav>
 
   <main class="page">
@@ -1133,31 +943,10 @@
         </div>
         <div class="hero-actions">
           <a class="btn" href="#makers">Смотреть участников →</a>
-          <a class="btn secondary" href="#visitor">Я хочу прийти</a>
+          <a class="btn secondary" href="#process">Я хочу прийти</a>
           <a class="btn secondary" href="#apply">Стать участником</a>
         </div>
       </div>
-      <div class="hero-aside" aria-label="Примеры товаров на маркете">
-        <div class="hero-panel">
-          <div class="hero-panel-main" style="--img:url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=900&q=80')"></div>
-          <div class="hero-panel-body">
-            <strong class="hero-panel-title">Подарки без случайности</strong>
-            <p>Керамика, свечи, мыло, декор, предметы для дома и небольшие серии от локальных авторов.</p>
-          </div>
-        </div>
-        <div class="hero-mini-grid">
-          <div class="hero-mini" style="--img:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=500&q=80')"><span>Керамика</span></div>
-          <div class="hero-mini" style="--img:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=500&q=80')"><span>Свечи</span></div>
-          <div class="hero-mini" style="--img:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=500&q=80')"><span>Предметы</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="feature-strip" aria-label="Что будет на маркете">
-      <article class="feature-card"><span>Для посетителей</span><div><strong>Выбрать подарок</strong><p>Можно прийти без списка и уйти с вещью, которую приятно дарить.</p></div></article>
-      <article class="feature-card"><span>Для мастеров</span><div><strong>Показать работу</strong><p>Живой контакт с людьми важнее случайной ленты и безличной витрины.</p></div></article>
-      <article class="feature-card"><span>На месте</span><div><strong>Смотреть руками</strong><p>Фактура, вес, упаковка и детали понятны только вживую.</p></div></article>
-      <article class="feature-card"><span>Скоро</span><div><strong>Дата и адрес</strong><p>Добавим точную площадку, время работы и быстрый маршрут.</p></div></article>
     </section>
 
     <section class="blue-strip">
@@ -1273,23 +1062,10 @@
             <p class="lead" style="margin:0;">Сохрани страницу или подпишись на анонсы: ближе к мероприятию добавим точную точку, время работы и удобный маршрут.</p>
           </div>
           <div class="hero-actions">
-            <a class="btn" href="#visitor">Получить анонс</a>
+            <a class="btn" href="#makers">Смотреть участников</a>
             <a class="btn secondary" href="#apply">Я мастер</a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="visitor-cta" id="visitor">
-      <div>
-        <div class="kicker"><span>Для гостей</span> не надо готовиться</div>
-        <h2 class="title">Просто<br>приходи</h2>
-        <p class="lead">Маркет работает как спокойная прогулка: можно смотреть, спрашивать, выбирать подарки и возвращаться к столам, которые зацепили.</p>
-      </div>
-      <div class="visitor-actions">
-        <a class="visitor-action" href="#makers"><span>01</span><strong>Посмотреть мастеров</strong></a>
-        <a class="visitor-action" href="#place"><span>02</span><strong>Ждать адрес</strong></a>
-        <a class="visitor-action" href="#"><span>03</span><strong>Подписаться</strong></a>
       </div>
     </section>
 
@@ -1343,15 +1119,12 @@
 <script>
 const revealItems = [
   '.hero-content',
-  '.hero-aside',
-  '.feature-card',
   '.blue-strip .manifest-copy',
   '.blue-strip .manifest-item',
   '.section-head',
   '.process-card',
   '.makers-wrap',
   '#place > div:nth-of-type(2) > div',
-  '.visitor-cta > div',
   '.poster-text',
   '.poster-art',
   '.footer > div'
