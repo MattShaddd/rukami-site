@@ -154,6 +154,37 @@
       transform: scaleX(1);
     }
 
+    .nav-socials {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink-muted);
+      font-size: var(--text-xs);
+      font-weight: 900;
+      letter-spacing: var(--tracking-ui);
+      text-transform: uppercase;
+    }
+
+    .nav-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      transition: color .2s ease, border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
+    }
+
+    .nav-socials a:hover,
+    .nav-socials a:focus-visible {
+      color: var(--white);
+      border-color: var(--cyan);
+      background: color-mix(in srgb, var(--cyan) 9%, transparent);
+      transform: translateY(-2px);
+      box-shadow: 0 0 18px color-mix(in srgb, var(--cyan) 38%, transparent);
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -1096,7 +1127,11 @@
       <a href="#place">Место</a>
       <a href="#apply">Заявка</a>
     </div>
-    <a class="btn" href="#process">Хочу прийти ?</a>
+    <div class="nav-socials" aria-label="Социальные сети">
+      <a href="#" aria-label="Telegram">TG</a>
+      <a href="#" aria-label="ВКонтакте">VK</a>
+      <a href="#" aria-label="Instagram">IG</a>
+    </div>
   </nav>
 
   <main class="page">
