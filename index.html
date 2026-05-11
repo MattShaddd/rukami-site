@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -121,6 +121,39 @@
       color: var(--ink-muted);
     }
 
+    .nav-links a {
+      position: relative;
+      transition: color .2s ease, transform .2s ease, text-shadow .2s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--cyan);
+      opacity: 0;
+      transform: scaleX(.4);
+      transform-origin: center;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--white);
+      transform: translateY(-2px);
+      text-shadow: 0 0 16px color-mix(in srgb, var(--cyan) 60%, transparent);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -157,6 +190,50 @@
       background: var(--white);
       color: var(--black);
       border-color: var(--white);
+    }
+
+    .glow-surface {
+      --glow-color: var(--cyan);
+      --glow-radius: inherit;
+      --glow-inset: 0;
+      position: relative;
+      isolation: isolate;
+      transition: background-color .25s ease, transform .25s ease, filter .25s ease;
+    }
+
+    .glow-surface::before {
+      content: "";
+      position: absolute;
+      inset: var(--glow-inset);
+      z-index: 0;
+      pointer-events: none;
+      border-radius: var(--glow-radius);
+      background: color-mix(in srgb, var(--glow-color) 12%, transparent);
+      opacity: 0;
+      transform: scale(.96);
+      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+      transition: opacity .25s ease, transform .25s ease, box-shadow .25s ease;
+    }
+
+    .glow-surface > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .glow-surface:hover,
+    .glow-surface:focus-within {
+      background: color-mix(in srgb, var(--glow-color) 5%, transparent);
+      transform: translateY(-6px);
+      filter: drop-shadow(0 0 18px color-mix(in srgb, var(--glow-color) 42%, transparent));
+    }
+
+    .glow-surface:hover::before,
+    .glow-surface:focus-within::before {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow:
+        0 0 24px color-mix(in srgb, var(--glow-color) 42%, transparent),
+        inset 0 0 28px color-mix(in srgb, var(--glow-color) 14%, transparent);
     }
 
     .hero {
@@ -249,17 +326,22 @@
     .event-facts {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
+      gap: 0;
       width: min(100%, 760px);
       margin: 0 0 32px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
 
     .event-fact {
-      min-height: 112px;
-      padding: 18px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-card);
-      background: var(--paper-faint);
+      min-height: 0;
+      padding: 0 18px;
+      border-right: 1px solid var(--line);
+    }
+
+    .event-fact:last-child {
+      border-right: 0;
     }
 
     .event-fact span {
@@ -269,13 +351,13 @@
       font-weight: 900;
       letter-spacing: var(--tracking-ui);
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .event-fact strong {
       display: block;
       color: var(--white);
-      font-size: var(--text-xl);
+      font-size: var(--text-lg);
       line-height: var(--lh-tight);
       text-transform: uppercase;
     }
@@ -313,15 +395,6 @@
       z-index: 1;
     }
 
-    .manifest-eyebrow {
-      color: var(--white);
-      font-size: var(--text-sm);
-      font-weight: 900;
-      letter-spacing: var(--tracking-kicker);
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-
     .manifest-title {
       font-family: 'Arial Black', Arial, sans-serif;
       font-size: var(--section-title-size);
@@ -346,6 +419,8 @@
     }
 
     .manifest-item {
+      --glow-color: var(--cyan);
+      --glow-radius: var(--radius-card);
       display: flex;
       align-items: center;
       gap: 22px;
@@ -355,6 +430,18 @@
       border-radius: var(--radius-card);
       background: var(--black-soft);
       color: var(--white);
+    }
+
+    .manifest-item:nth-child(1) {
+      --glow-color: var(--red);
+    }
+
+    .manifest-item:nth-child(2) {
+      --glow-color: var(--cyan);
+    }
+
+    .manifest-item:nth-child(3) {
+      --glow-color: var(--blue);
     }
 
     .manifest-item:nth-child(1) .manifest-num {
@@ -373,10 +460,6 @@
       border-color: var(--blue);
       background: var(--blue);
       color: var(--black);
-    }
-
-    .manifest-item:last-child {
-      border-color: var(--blue);
     }
 
     .manifest-num {
@@ -417,7 +500,9 @@
     .title,
     .manifest-title {
       max-width: 100%;
-      overflow-wrap: anywhere;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
     }
 
     .section > * {
@@ -454,49 +539,57 @@
     }
 
     .process-grid {
-      --process-card-height: clamp(220px, 24vw, 320px);
-      --process-gap: 16px;
+      --process-card-height: auto;
+      --process-gap: 0;
       display: grid;
       grid-template-columns: repeat(5, minmax(0, 1fr));
       gap: var(--process-gap);
       max-width: none;
       margin: 0 auto;
       padding-bottom: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
 
     .process-card {
       --card-bg: var(--blue);
       --card-fg: var(--white);
-      height: var(--process-card-height);
-      min-height: 0;
+      --glow-color: var(--card-fg);
+      height: auto;
+      min-height: clamp(190px, 18vw, 240px);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 18px;
-      padding: clamp(22px, 3vw, 34px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-card);
-      overflow: hidden;
+      justify-content: flex-start;
+      gap: 16px;
+      padding: clamp(22px, 2.4vw, 34px) clamp(18px, 2vw, 28px);
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-radius: 0;
+      overflow: visible;
       position: relative;
-      background: var(--card-bg);
-      color: var(--card-fg);
+      background: transparent;
+      color: var(--white);
+    }
+
+    .process-card:last-child {
+      border-right: 0;
     }
 
     .process-card:nth-child(1) {
       --card-bg: var(--cyan);
-      --card-fg: var(--black);
+      --card-fg: var(--cyan);
       --stack-top: 96px;
     }
 
     .process-card:nth-child(2) {
       --card-bg: var(--yellow);
-      --card-fg: var(--black);
+      --card-fg: var(--yellow);
       --stack-top: 114px;
     }
 
     .process-card:nth-child(3) {
       --card-bg: var(--red);
-      --card-fg: var(--white);
+      --card-fg: var(--red);
       --stack-top: 132px;
     }
 
@@ -508,40 +601,53 @@
 
     .process-card:nth-child(5) {
       --card-bg: var(--blue);
-      --card-fg: var(--white);
+      --card-fg: var(--blue);
       --stack-top: 168px;
     }
 
     .num {
-      position: absolute;
-      right: clamp(18px, 4vw, 48px);
-      top: clamp(12px, 3vw, 34px);
+      position: static;
       color: var(--card-fg);
-      opacity: .18;
+      opacity: 1;
       font-family: 'Arial Black', Arial, sans-serif;
       font-weight: 700;
-      font-size: var(--display-num);
-      line-height: var(--lh-solid);
+      font-size: clamp(18px, 1.8vw, 28px);
+      line-height: 1;
+      transition: transform .25s ease, filter .25s ease;
     }
 
     .process-card h3 {
       position: relative;
       z-index: 1;
-      max-width: 720px;
-      color: var(--card-fg);
+      max-width: none;
+      color: var(--white);
       font-family: 'Arial Black', Arial, sans-serif;
-      font-size: clamp(24px, 2.6vw, 42px);
+      font-size: clamp(18px, 1.7vw, 28px);
       line-height: var(--lh-solid);
       text-transform: uppercase;
-      overflow-wrap: anywhere;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+      transition: color .25s ease;
+    }
+
+    .process-card:hover .num,
+    .process-card:focus-within .num {
+      transform: translateX(6px);
+      filter: brightness(1.15);
+    }
+
+    .process-card:hover h3,
+    .process-card:focus-within h3 {
+      color: var(--card-fg);
     }
 
     .process-card p {
       position: relative;
       z-index: 1;
-      max-width: 560px;
-      color: var(--card-fg);
-      font-size: clamp(15px, 1.25vw, 18px);
+      max-width: 340px;
+      color: var(--ink-muted);
+      font-size: clamp(14px, 1.05vw, 16px);
       line-height: var(--lh-body);
       font-weight: 700;
     }
@@ -613,6 +719,9 @@
     }
 
     .maker-card {
+      --glow-color: var(--cyan);
+      --glow-radius: var(--radius-card);
+      --glow-inset: 0;
       appearance: none;
       border: 1px solid var(--line);
       padding: 0;
@@ -625,12 +734,10 @@
       overflow: hidden;
       background: var(--paper-faint);
       scroll-snap-align: start;
-      transition: border-color .24s ease, background .24s ease;
       cursor: pointer;
     }
 
     .maker-card:hover {
-      border-color: var(--white);
       background: var(--paper-soft);
     }
 
@@ -701,6 +808,68 @@
       grid-template-columns: .95fr 1.05fr;
       min-height: 640px;
       border-bottom: 1px solid var(--line);
+    }
+
+    .place-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .place-map-card {
+      --glow-color: var(--white);
+      --glow-radius: var(--radius-card);
+      container-type: inline-size;
+      min-height: 420px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background: var(--black-soft);
+      color: var(--white);
+      display: grid;
+      place-items: center;
+      padding: clamp(28px, 4vw, 48px);
+      text-align: center;
+    }
+
+    .place-map-inner {
+      width: 100%;
+      max-width: 100%;
+      display: grid;
+      justify-items: center;
+      gap: 16px;
+      overflow: hidden;
+    }
+
+    .place-map-title {
+      font-size: clamp(36px, 10cqw, 64px) !important;
+      max-width: 100%;
+      line-height: var(--lh-solid);
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+      text-align: center;
+    }
+
+    .place-map-card p {
+      width: min(100%, 420px);
+      color: var(--ink-muted);
+      line-height: var(--lh-relaxed);
+      text-align: center;
+    }
+
+    .place-update-card {
+      --glow-color: var(--cyan);
+      --glow-radius: var(--radius-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      background: var(--paper-faint);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
     }
 
     .poster-text {
@@ -807,7 +976,7 @@
     @media (max-width: 1080px) {
       .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .poster { grid-template-columns: 1fr; }
-      #place > div:nth-of-type(2) { grid-template-columns: 1fr !important; }
+      .place-grid { grid-template-columns: 1fr; }
       .blue-strip { grid-template-columns: 1fr; }
       .maker-card { width: min(78vw, 300px); flex-basis: min(78vw, 300px); }
       .poster-art { min-height: 560px; border-left: none; }
@@ -927,7 +1096,7 @@
       <a href="#place">Место</a>
       <a href="#apply">Заявка</a>
     </div>
-    <a class="btn" href="#process">Хочу прийти ↗</a>
+    <a class="btn" href="#process">Хочу прийти ?</a>
   </nav>
 
   <main class="page">
@@ -942,7 +1111,7 @@
           <div class="event-fact"><span>Формат</span><strong>30+ мастеров</strong></div>
         </div>
         <div class="hero-actions">
-          <a class="btn" href="#makers">Смотреть участников →</a>
+          <a class="btn" href="#makers">Смотреть участников ></a>
           <a class="btn secondary" href="#process">Я хочу прийти</a>
           <a class="btn secondary" href="#apply">Стать участником</a>
         </div>
@@ -951,14 +1120,13 @@
 
     <section class="blue-strip">
       <div class="manifest-copy">
-        <div class="manifest-eyebrow">Не витрина. Живая встреча.</div>
         <h2 class="manifest-title">Здесь выбирают не с полки, а у автора.</h2>
         <p class="manifest-note">Мастера рядом, истории рядом, выбор спокойный. Можно смотреть, спрашивать и находить подарки, которые не выглядят случайными.</p>
       </div>
       <div class="manifest-list">
-        <div class="manifest-item"><span class="manifest-num">01</span><div><h3>Поговорить с автором</h3><p>Узнать, как появилась вещь, из чего она сделана и почему именно так.</p></div></div>
-        <div class="manifest-item"><span class="manifest-num">02</span><div><h3>Увидеть детали</h3><p>Материалы, фактуры, упаковка и маленькие решения, которые не видно на витрине.</p></div></div>
-        <div class="manifest-item"><span class="manifest-num">03</span><div><h3>Выбрать с характером</h3><p>Подарок или вещь для себя, у которой есть настроение и человек за ней.</p></div></div>
+        <div class="manifest-item glow-surface"><span class="manifest-num">01</span><div><h3>Поговорить с автором</h3><p>Узнать, как появилась вещь, из чего она сделана и почему именно так.</p></div></div>
+        <div class="manifest-item glow-surface"><span class="manifest-num">02</span><div><h3>Увидеть детали</h3><p>Материалы, фактуры, упаковка и маленькие решения, которые не видно на витрине.</p></div></div>
+        <div class="manifest-item glow-surface"><span class="manifest-num">03</span><div><h3>Выбрать с характером</h3><p>Подарок или вещь для себя, у которой есть настроение и человек за ней.</p></div></div>
       </div>
     </section>
 
@@ -968,11 +1136,11 @@
         <p class="section-note">На маркете можно пройтись между столами, рассмотреть товары, задать вопросы авторам и выбрать вещь, которая подходит именно тебе.</p>
       </div>
       <div class="process-grid">
-        <article class="process-card"><div class="num">01</div><h3>Приходишь</h3><p>Заходишь на маркет и сразу попадаешь в живую среду авторов.</p></article>
-        <article class="process-card"><div class="num">02</div><h3>Смотришь</h3><p>Спокойно осматриваешь столы, материалы, упаковку и детали.</p></article>
-        <article class="process-card"><div class="num">03</div><h3>Общаешься</h3><p>Можно поговорить с мастерами и узнать историю каждой вещи.</p></article>
-        <article class="process-card"><div class="num">04</div><h3>Выбираешь</h3><p>Находишь товар под свой вкус, цвет, настроение или подарок.</p></article>
-        <article class="process-card"><div class="num">05</div><h3>Уносишь</h3><p>Забираешь с собой не просто покупку, а маленькую авторскую историю.</p></article>
+        <article class="process-card glow-surface"><div class="num">01</div><h3>Приходишь</h3><p>Заходишь на маркет и сразу попадаешь в живую среду авторов.</p></article>
+        <article class="process-card glow-surface"><div class="num">02</div><h3>Смотришь</h3><p>Спокойно осматриваешь столы, материалы, упаковку и детали.</p></article>
+        <article class="process-card glow-surface"><div class="num">03</div><h3>Общаешься</h3><p>Можно поговорить с мастерами и узнать историю каждой вещи.</p></article>
+        <article class="process-card glow-surface"><div class="num">04</div><h3>Выбираешь</h3><p>Находишь товар под свой вкус, цвет, настроение или подарок.</p></article>
+        <article class="process-card glow-surface"><div class="num">05</div><h3>Уносишь</h3><p>Забираешь с собой не просто покупку, а маленькую авторскую историю.</p></article>
       </div>
     </section>
 
@@ -984,59 +1152,59 @@
       <div class="makers-wrap">
         <div class="makers" aria-label="Карусель участников">
           <div class="makers-track">
-          <button class="maker-card" type="button" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-desc="Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках." data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-desc="Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках." data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Лёха</strong><span class="maker-role">3D-печать</span></div><p class="maker-desc">Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках.</p><div class="maker-tags"><span>пластик</span><span>прототипы</span><span>на заказ</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Лёха</strong><span class="maker-role">3D-печать</span></div><p class="maker-desc">Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках.</p><div class="maker-tags"><span>пластик</span><span>прототипы</span><span>на заказ</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" onclick="openModal(this)" data-name="Катя" data-role="Мыло" data-desc="Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума." data-img="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" onclick="openModal(this)" data-name="Катя" data-role="Мыло" data-desc="Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума." data-img="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Катя</strong><span class="maker-role">Мыло</span></div><p class="maker-desc">Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума.</p><div class="maker-tags"><span>ароматы</span><span>уход</span><span>подарки</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Катя</strong><span class="maker-role">Мыло</span></div><p class="maker-desc">Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума.</p><div class="maker-tags"><span>ароматы</span><span>уход</span><span>подарки</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" onclick="openModal(this)" data-name="Макс" data-role="Предметы" data-desc="Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера." data-img="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" onclick="openModal(this)" data-name="Макс" data-role="Предметы" data-desc="Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера." data-img="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Макс</strong><span class="maker-role">Предметы</span></div><p class="maker-desc">Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера.</p><div class="maker-tags"><span>дом</span><span>стол</span><span>дерево</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Макс</strong><span class="maker-role">Предметы</span></div><p class="maker-desc">Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера.</p><div class="maker-tags"><span>дом</span><span>стол</span><span>дерево</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" onclick="openModal(this)" data-name="Настя" data-role="Керамика" data-desc="Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная." data-img="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" onclick="openModal(this)" data-name="Настя" data-role="Керамика" data-desc="Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная." data-img="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Настя</strong><span class="maker-role">Керамика</span></div><p class="maker-desc">Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная.</p><div class="maker-tags"><span>глина</span><span>посуда</span><span>ручная лепка</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Настя</strong><span class="maker-role">Керамика</span></div><p class="maker-desc">Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная.</p><div class="maker-tags"><span>глина</span><span>посуда</span><span>ручная лепка</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" onclick="openModal(this)" data-name="Саша" data-role="Декор" data-desc="Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра." data-img="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" onclick="openModal(this)" data-name="Саша" data-role="Декор" data-desc="Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра." data-img="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Саша</strong><span class="maker-role">Декор</span></div><p class="maker-desc">Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра.</p><div class="maker-tags"><span>интерьер</span><span>текстиль</span><span>постеры</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Саша</strong><span class="maker-role">Декор</span></div><p class="maker-desc">Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра.</p><div class="maker-tags"><span>интерьер</span><span>текстиль</span><span>постеры</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" onclick="openModal(this)" data-name="Оля" data-role="Свечи" data-desc="Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать." data-img="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" onclick="openModal(this)" data-name="Оля" data-role="Свечи" data-desc="Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать." data-img="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Оля</strong><span class="maker-role">Свечи</span></div><p class="maker-desc">Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать.</p><div class="maker-tags"><span>соевый воск</span><span>ароматы</span><span>уют</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Оля</strong><span class="maker-role">Свечи</span></div><p class="maker-desc">Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать.</p><div class="maker-tags"><span>соевый воск</span><span>ароматы</span><span>уют</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-desc="Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках." data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Лёха" data-role="3D-печать" data-desc="Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках." data-img="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Лёха</strong><span class="maker-role">3D-печать</span></div><p class="maker-desc">Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках.</p><div class="maker-tags"><span>пластик</span><span>прототипы</span><span>на заказ</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Лёха</strong><span class="maker-role">3D-печать</span></div><p class="maker-desc">Небольшие предметы, детали для дома и странные полезные штуки, которые хочется вертеть в руках.</p><div class="maker-tags"><span>пластик</span><span>прототипы</span><span>на заказ</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Катя" data-role="Мыло" data-desc="Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума." data-img="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Катя" data-role="Мыло" data-desc="Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума." data-img="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Катя</strong><span class="maker-role">Мыло</span></div><p class="maker-desc">Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума.</p><div class="maker-tags"><span>ароматы</span><span>уход</span><span>подарки</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Катя</strong><span class="maker-role">Мыло</span></div><p class="maker-desc">Мыло маленькими партиями: спокойные запахи, аккуратная форма и упаковка без лишнего шума.</p><div class="maker-tags"><span>ароматы</span><span>уход</span><span>подарки</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Макс" data-role="Предметы" data-desc="Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера." data-img="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Макс" data-role="Предметы" data-desc="Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера." data-img="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Макс</strong><span class="maker-role">Предметы</span></div><p class="maker-desc">Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера.</p><div class="maker-tags"><span>дом</span><span>стол</span><span>дерево</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Макс</strong><span class="maker-role">Предметы</span></div><p class="maker-desc">Предметы для рабочего стола и дома: простые формы, честные материалы и немного инженерного характера.</p><div class="maker-tags"><span>дом</span><span>стол</span><span>дерево</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Настя" data-role="Керамика" data-desc="Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная." data-img="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Настя" data-role="Керамика" data-desc="Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная." data-img="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Настя</strong><span class="maker-role">Керамика</span></div><p class="maker-desc">Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная.</p><div class="maker-tags"><span>глина</span><span>посуда</span><span>ручная лепка</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Настя</strong><span class="maker-role">Керамика</span></div><p class="maker-desc">Чашки, тарелки и небольшие формы с живой неровностью: каждая вещь чуть-чуть единственная.</p><div class="maker-tags"><span>глина</span><span>посуда</span><span>ручная лепка</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Саша" data-role="Декор" data-desc="Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра." data-img="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Саша" data-role="Декор" data-desc="Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра." data-img="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Саша</strong><span class="maker-role">Декор</span></div><p class="maker-desc">Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра.</p><div class="maker-tags"><span>интерьер</span><span>текстиль</span><span>постеры</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Саша</strong><span class="maker-role">Декор</span></div><p class="maker-desc">Декоративные штуки для полок, стен и подарков: фактуры, бумага, ткань и немного театра.</p><div class="maker-tags"><span>интерьер</span><span>текстиль</span><span>постеры</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
-          <button class="maker-card" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Оля" data-role="Свечи" data-desc="Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать." data-img="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
+          <button class="maker-card glow-surface" type="button" aria-hidden="true" tabindex="-1" onclick="openModal(this)" data-name="Оля" data-role="Свечи" data-desc="Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать." data-img="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80" data-link="https://instagram.com">
             <div class="maker-photo" style="--img:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=600&q=80')"></div>
-            <div class="maker-info"><div><strong>Оля</strong><span class="maker-role">Свечи</span></div><p class="maker-desc">Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать.</p><div class="maker-tags"><span>соевый воск</span><span>ароматы</span><span>уют</span></div><span class="maker-link">Подробнее →</span></div>
+            <div class="maker-info"><div><strong>Оля</strong><span class="maker-role">Свечи</span></div><p class="maker-desc">Свечи в маленьких сериях: мягкий свет, теплые запахи и баночки, которые не хочется прятать.</p><div class="maker-tags"><span>соевый воск</span><span>ароматы</span><span>уют</span></div><span class="maker-link">Подробнее ></span></div>
           </button>
           </div>
         </div>
       </div>
       <div class="hero-actions" style="justify-content:center; margin-top:26px;">
-        <a class="btn" href="makers.html">Показать всех →</a>
+        <a class="btn" href="makers.html">Показать всех ></a>
       </div>
     </section>
 
@@ -1046,17 +1214,17 @@
         <p class="section-note">Площадку, дату и время объявим отдельно. Чтобы не потерять обновление, оставь контакт или подпишись на соцсети маркета.</p>
       </div>
 
-      <div style="display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:stretch;">
-        <div style="min-height:420px; border:1px solid var(--line); border-radius:var(--radius-card); overflow:hidden; background:var(--black-soft); color:var(--white); display:grid; place-items:center; padding:32px; text-align:center;">
+      <div class="place-grid">
+        <div class="place-map-card glow-surface">
           
-          <div>
+          <div class="place-map-inner">
             <div class="tag" style="margin-bottom:18px;">карта появится позже</div>
-            <h3 class="title" style="font-size:var(--section-title-size);">Новосибирск</h3>
-            <p style="margin-top:14px; color:var(--ink-muted); max-width:420px; line-height:var(--lh-relaxed);">Как только площадка будет утверждена, здесь появится точный адрес и понятная схема прохода.</p>
+            <h3 class="title place-map-title">Новосибирск</h3>
+            <p>Как только площадка будет утверждена, здесь появится точный адрес и понятная схема прохода.</p>
           </div>
         </div>
 
-        <div style="border:1px solid var(--line); border-radius:var(--radius-card); padding:32px; background:var(--paper-faint); display:flex; flex-direction:column; justify-content:space-between; gap:24px;">
+        <div class="place-update-card glow-surface">
           <div>
             <div class="kicker"><span>Обновления</span> без лишнего шума</div>
             <p class="lead" style="margin:0;">Сохрани страницу или подпишись на анонсы: ближе к мероприятию добавим точную точку, время работы и удобный маршрут.</p>
@@ -1107,7 +1275,7 @@
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-name" aria-hidden="true">
   <div class="modal-card">
-    <button class="modal-close" type="button" onclick="closeModal()" aria-label="Закрыть">✕</button>
+    <button class="modal-close" type="button" onclick="closeModal()" aria-label="Закрыть">?</button>
     <img id="modal-img" src="" alt="" />
     <h3 id="modal-name"></h3>
     <p id="modal-role"></p>
@@ -1122,9 +1290,9 @@ const revealItems = [
   '.blue-strip .manifest-copy',
   '.blue-strip .manifest-item',
   '.section-head',
-  '.process-card',
   '.makers-wrap',
-  '#place > div:nth-of-type(2) > div',
+  '.place-map-card',
+  '.place-update-card',
   '.poster-text',
   '.poster-art',
   '.footer > div'
@@ -1157,7 +1325,6 @@ if (revealNodes.length) {
   }
 }
 
-const processCards = Array.from(document.querySelectorAll('.process-card'));
 const makersTrack = document.querySelector('.makers');
 const makersInner = document.querySelector('.makers-track');
 let makersDown = false;
@@ -1165,44 +1332,6 @@ let makersStartX = 0;
 let makersScrollLeft = 0;
 let makersDragged = false;
 let lastFocusedElement = null;
-
-if (processCards.length) {
-  let processTicking = false;
-
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-  const updateProcessStack = () => {
-    processCards.forEach((card, index) => {
-      const nextCard = processCards[index + 1];
-      if (!nextCard) {
-        card.style.setProperty('--stack-scale', '1');
-        card.style.setProperty('--stack-shift', '0px');
-        return;
-      }
-
-      const cardTop = parseFloat(getComputedStyle(card).top) || 96;
-      const nextTop = nextCard.getBoundingClientRect().top;
-      const progress = clamp((cardTop + 140 - nextTop) / 280, 0, 1);
-      const scale = 1 - progress * 0.12;
-      const shift = progress * -28;
-
-      card.style.setProperty('--stack-scale', scale.toFixed(3));
-      card.style.setProperty('--stack-shift', `${shift.toFixed(1)}px`);
-    });
-
-    processTicking = false;
-  };
-
-  const requestProcessStack = () => {
-    if (processTicking) return;
-    processTicking = true;
-    window.requestAnimationFrame(updateProcessStack);
-  };
-
-  updateProcessStack();
-  window.addEventListener('scroll', requestProcessStack, { passive: true });
-  window.addEventListener('resize', requestProcessStack);
-}
 
 if (makersTrack) {
   const pauseMakers = () => { makersTrack.classList.add('paused'); };
